@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+       http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <description>Spring公共配置</description>
+    <context:component-scan base-package="com.youiju.api.*"/>
+
+    <!-- 定义受环境影响易变的变量 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:important.properties</value>
+                <value>classpath:application.properties</value>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:task.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <aop:config proxy-target-class="false"></aop:config>
+    <!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
+    <bean id="youijuDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${youiju.jdbc.driver}"/>
+        <property name="url" value="${youiju.jdbc.url}"/>
+        <property name="username" value="${youiju.jdbc.username}"/>
+        <property name="password" value="${youiju.jdbc.password}"/>
+        <property name="maxIdle" value="${dbcp.maxIdle}"/>
+        <property name="defaultAutoCommit" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="3600000"/>
+        <property name="minEvictableIdleTimeMillis" value="3600000"/>
+        <property name="connectionProperties" value="${youiju.jdbc.connectionProperties}"/>
+    </bean>
+    <bean id="alphaJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <qualifier type="org.springframework.beans.factory.annotation.Qualifier" value="jdbcTemplate"/>
+        <constructor-arg index="0" ref="youijuDataSource"/>
+    </bean>
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="youijuDataSource"></property>
+    </bean>
+    <!-- 启用事务注解 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="sqlSessionFactoryBeanName" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="youijuDataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:/mappers/*.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.youiju.api.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBeanName"/>
+    </bean>
+    
+</beans>

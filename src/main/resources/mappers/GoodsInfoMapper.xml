@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youiju.api.dao.GoodsInfoDao">
+
+    <select id="queryGoodsInfoById" resultMap="resultGoodsInfoMap">
+        SELECT `id` ,`goods_code`,`googs_name`,`goods_desc`,`goods_url`,`goods_price`,`goods_sum`,`now_price`,`yn`
+        FROM `goods_info`
+        where `yn` = 0 and id = #{goodsId}
+    </select>
+
+    <select id="queryGoodsEvaluateInfo" resultMap="resultGoodsEvaluateInfoMap">
+        SELECT `id` ,`goods_id`,`goods_eval`,`user_id`
+        FROM `goods_evaluate_info`
+        where `yn` = 0 and goods_id = #{goodsId}
+    </select>
+</mapper>
