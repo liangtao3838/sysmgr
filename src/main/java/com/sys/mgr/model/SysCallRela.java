@@ -1,18 +1,16 @@
 package com.sys.mgr.model;
 
-import org.springframework.stereotype.Repository;
-
 import java.io.Serializable;
 
 /**
- * Created by liangtao on 2018/3/14.
+ * Created by liangtao on 2018/3/18.
  */
-public class NodeInfo implements Serializable{
+public class SysCallRela implements Serializable{
     private long id;
-    private String nodeCode;
-    private String nodeName;
-    private String ipAddr;
-    private String callAddr;
+    private String routeUuid;
+    private String nowRouteNode;
+    private String nextRouteNode;
+    private String protocolUuid;
     private int yn;
     private String createTime;
     private String createPin;
@@ -28,36 +26,36 @@ public class NodeInfo implements Serializable{
         this.id = id;
     }
 
-    public String getNodeCode() {
-        return nodeCode;
+    public String getRouteUuid() {
+        return routeUuid;
     }
 
-    public void setNodeCode(String nodeCode) {
-        this.nodeCode = nodeCode;
+    public void setRouteUuid(String routeUuid) {
+        this.routeUuid = routeUuid;
     }
 
-    public String getNodeName() {
-        return nodeName;
+    public String getNowRouteNode() {
+        return nowRouteNode;
     }
 
-    public void setNodeName(String nodeName) {
-        this.nodeName = nodeName;
+    public void setNowRouteNode(String nowRouteNode) {
+        this.nowRouteNode = nowRouteNode;
     }
 
-    public String getIpAddr() {
-        return ipAddr;
+    public String getNextRouteNode() {
+        return nextRouteNode;
     }
 
-    public void setIpAddr(String ipAddr) {
-        this.ipAddr = ipAddr;
+    public void setNextRouteNode(String nextRouteNode) {
+        this.nextRouteNode = nextRouteNode;
     }
 
-    public String getCallAddr() {
-        return callAddr;
+    public String getProtocolUuid() {
+        return protocolUuid;
     }
 
-    public void setCallAddr(String callAddr) {
-        this.callAddr = callAddr;
+    public void setProtocolUuid(String protocolUuid) {
+        this.protocolUuid = protocolUuid;
     }
 
     public int getYn() {
@@ -110,12 +108,12 @@ public class NodeInfo implements Serializable{
 
     @Override
     public String toString() {
-        return "NodeInfo{" +
+        return "SysCallRela{" +
                 "id=" + id +
-                ", nodeCode='" + nodeCode + '\'' +
-                ", nodeName='" + nodeName + '\'' +
-                ", ipAddr='" + ipAddr + '\'' +
-                ", callAddr='" + callAddr + '\'' +
+                ", routeUuid='" + routeUuid + '\'' +
+                ", nowRouteNode='" + nowRouteNode + '\'' +
+                ", nextRouteNode='" + nextRouteNode + '\'' +
+                ", protocolUuid='" + protocolUuid + '\'' +
                 ", yn=" + yn +
                 ", createTime='" + createTime + '\'' +
                 ", createPin='" + createPin + '\'' +

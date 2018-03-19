@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mgr.dao.SysCallRelaDao">
+
+    <select id="getList" resultType="com.sys.mgr.model.SysCallRela">
+        SELECT `id` ,`route_uuid` as routeUuid,`now_route_node` as nowRouteNode,
+        `next_route_node` as nextRouteNode,`protocol_uuid` as protocolUuid,`yn`
+        FROM `sys_call_rela`
+        where `yn` = 0
+        limit #{offset},#{rows}
+    </select>
+
+    <select id="getCount" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM `sys_call_rela`
+        where `yn` = 0
+    </select>
+
+
+    <update id="add" parameterType="com.sys.mgr.model.SysCallRela">
+        insert into sys_call_rela
+        (route_uuid,now_route_node,next_route_node,protocol_uuid,
+        yn,create_time,create_pin) VALUES
+        (
+        #{routeUuid},
+        #{nowRouteNode},
+        #{nextRouteNode},
+        #{protocolUuid},
+        0,
+        now(),
+        #{createPin}
+        )
+    </update>
+
+
+    <update id="delete">
+        update sys_call_rela
+        set `yn` = 1,`update_time` = now(),`update_pin` = #{pin}
+        where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+
+    <select id="query" resultType="com.sys.mgr.model.SysCallRela">
+        SELECT `id` ,`route_uuid` as routeUuid,`now_route_node` as nowRouteNode,
+        `next_route_node` as nextRouteNode,`protocol_uuid` as protocolUuid,`yn`
+        FROM `sys_call_rela`
+        where `yn` = 0 and id=#{id}
+    </select>
+
+
+    <update id="update" parameterType="com.sys.mgr.model.SysCallRela">
+        update sys_call_rela
+        <set>
+            <if test="routeUuid != null">
+                route_uuid = #{routeUuid},
+            </if>
+            <if test="nowRouteNode != null">
+                now_route_node = #{nowRouteNode},
+            </if>
+            <if test="nextRouteNode != null">
+                next_route_node = #{nextRouteNode},
+            </if>
+            <if test="protocolUuid != null">
+                protocol_uuid = #{protocolUuid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

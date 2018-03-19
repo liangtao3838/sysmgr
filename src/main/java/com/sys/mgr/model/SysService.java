@@ -1,24 +1,25 @@
 package com.sys.mgr.model;
 
-import org.springframework.stereotype.Repository;
-
 import java.io.Serializable;
 
 /**
- * Created by liangtao on 2018/3/14.
+ * Created by liangtao on 2018/3/18.
  */
-public class NodeInfo implements Serializable{
+public class SysService implements Serializable {
     private long id;
-    private String nodeCode;
+    private String serviceName;
     private String nodeName;
-    private String ipAddr;
-    private String callAddr;
+    private String nodeCode;
+    private String serviceAddr;
+    private String methodName;
+    private String protocolType;
     private int yn;
     private String createTime;
     private String createPin;
     private String updateTime;
     private String updatePin;
     private String ts;
+
 
     public long getId() {
         return id;
@@ -28,12 +29,12 @@ public class NodeInfo implements Serializable{
         this.id = id;
     }
 
-    public String getNodeCode() {
-        return nodeCode;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setNodeCode(String nodeCode) {
-        this.nodeCode = nodeCode;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     public String getNodeName() {
@@ -44,20 +45,36 @@ public class NodeInfo implements Serializable{
         this.nodeName = nodeName;
     }
 
-    public String getIpAddr() {
-        return ipAddr;
+    public String getNodeCode() {
+        return nodeCode;
     }
 
-    public void setIpAddr(String ipAddr) {
-        this.ipAddr = ipAddr;
+    public void setNodeCode(String nodeCode) {
+        this.nodeCode = nodeCode;
     }
 
-    public String getCallAddr() {
-        return callAddr;
+    public String getServiceAddr() {
+        return serviceAddr;
     }
 
-    public void setCallAddr(String callAddr) {
-        this.callAddr = callAddr;
+    public void setServiceAddr(String serviceAddr) {
+        this.serviceAddr = serviceAddr;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public String getProtocolType() {
+        return protocolType;
+    }
+
+    public void setProtocolType(String protocolType) {
+        this.protocolType = protocolType;
     }
 
     public int getYn() {
@@ -110,12 +127,14 @@ public class NodeInfo implements Serializable{
 
     @Override
     public String toString() {
-        return "NodeInfo{" +
+        return "SysService{" +
                 "id=" + id +
-                ", nodeCode='" + nodeCode + '\'' +
+                ", serviceName='" + serviceName + '\'' +
                 ", nodeName='" + nodeName + '\'' +
-                ", ipAddr='" + ipAddr + '\'' +
-                ", callAddr='" + callAddr + '\'' +
+                ", nodeCode='" + nodeCode + '\'' +
+                ", serviceAddr='" + serviceAddr + '\'' +
+                ", methodName='" + methodName + '\'' +
+                ", protocolType='" + protocolType + '\'' +
                 ", yn=" + yn +
                 ", createTime='" + createTime + '\'' +
                 ", createPin='" + createPin + '\'' +
@@ -125,3 +144,4 @@ public class NodeInfo implements Serializable{
                 '}';
     }
 }
+

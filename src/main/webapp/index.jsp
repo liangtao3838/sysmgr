@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>系统管理界面</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="<%=basePath%>/js/bootstrap-3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=basePath%>/js/AdminLTE-2.3.0/plugins/font-awesome-4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<%=basePath%>/js/AdminLTE-2.3.0/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="<%=basePath%>/js/AdminLTE-2.3.0/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/bootstrap/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/bootstrap/AdminLTE-2.3.0/plugins/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/bootstrap/AdminLTE-2.3.0/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<%=basePath%>/bootstrap/AdminLTE-2.3.0/css/skins/_all-skins.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -45,7 +45,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="<%=basePath%>/js/AdminLTE-2.3.0/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="<%=basePath%>/bootstrap/AdminLTE-2.3.0/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>管理员</p>
@@ -64,10 +64,10 @@
                         <li><a href="nodeinfo/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>节点配置管理</span></a></li>
                     </ul>
                     <ul class="treeview-menu">
-                        <li><a href="systemcall/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统调用配置管理</span></a></li>
+                        <li><a href="syscallrela/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统调用配置管理</span></a></li>
                     </ul>
                     <ul class="treeview-menu">
-                        <li><a href="servicecall/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务调用配置管理</span></a></li>
+                        <li><a href="sysservice/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务调用配置管理</span></a></li>
                     </ul>
                 </li>
 
@@ -98,15 +98,15 @@
 </div>
 
 <!-- jQuery 2.1.4 -->
-<script src="<%=basePath%>/js/AdminLTE-2.3.0/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<%=basePath%>/bootstrap/AdminLTE-2.3.0/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="<%=basePath%>/js/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="<%=basePath%>/bootstrap/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="<%=basePath%>/js/AdminLTE-2.3.0/plugins/fastclick/fastclick.min.js"></script>
+<script src="<%=basePath%>/bootstrap/AdminLTE-2.3.0/plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<%=basePath%>/js/AdminLTE-2.3.0/js/app.min.js"></script>
+<script src="<%=basePath%>/bootstrap/AdminLTE-2.3.0/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=basePath%>/js/AdminLTE-2.3.0/js/demo.js"></script>
+<script src="<%=basePath%>/bootstrap/AdminLTE-2.3.0/js/demo.js"></script>
 
 <script>
     $(function(){

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mgr.dao.SysServiceDao">
+
+    <select id="getList" resultType="com.sys.mgr.model.SysService">
+        SELECT `id` ,`service_name` as serviceName,`node_code` as nodeCode,`node_name` as nodeName,
+        `service_addr` as serviceAddr,`method_name` as methodName,`protocol_type` as protocolType,
+        `yn`
+        FROM `sys_service`
+        where `yn` = 0
+        limit #{offset},#{rows}
+    </select>
+
+
+    <select id="getCount" resultType="java.lang.Long">
+        SELECT count(*)
+        `yn`
+        FROM `sys_service`
+        where `yn` = 0
+    </select>
+
+
+    <update id="add" parameterType="com.sys.mgr.model.SysService">
+        insert into sys_service
+        (service_name,node_code,node_name,service_addr,method_name,protocol_type,
+        yn,create_time,create_pin) VALUES
+        (
+        #{serviceName},
+        #{nodeCode},
+        #{nodeName},
+        #{serviceAddr},
+        #{methodName},
+        #{protocolType},
+        0,
+        now(),
+        #{createPin}
+        )
+    </update>
+
+
+    <update id="delete">
+        update sys_service
+        set `yn` = 1,`update_time` = now(),`update_pin` = #{pin}
+        where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+
+    <select id="query" resultType="com.sys.mgr.model.SysService">
+        SELECT `id` ,`service_name` as serviceName,`node_code` as nodeCode,`node_name` as nodeName,
+        `service_addr` as serviceAddr,`method_name` as methodName,`protocol_type` as protocolType,
+        `yn`
+        FROM `sys_service`
+        where `yn` = 0 and id=#{id}
+    </select>
+
+
+    <update id="update" parameterType="com.sys.mgr.model.SysService">
+        update sys_service
+        <set>
+            <if test="serviceName != null">
+                service_name = #{serviceName},
+            </if>
+            <if test="nodeCode != null">
+                node_code = #{nodeCode},
+            </if>
+            <if test="nodeName != null">
+                node_name = #{nodeName},
+            </if>
+            <if test="serviceAddr != null">
+                service_addr = #{serviceAddr},
+            </if>
+            <if test="methodName != null">
+                method_name = #{methodName},
+            </if>
+            <if test="protocolType != null">
+                protocol_type = #{protocolType},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

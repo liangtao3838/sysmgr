@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mgr.dao.NodeInfoDao">
+
+    <select id="getList" resultType="com.sys.mgr.model.NodeInfo">
+        SELECT `id` ,`node_code` as nodeCode,`node_name` as nodeName,
+        `ip_addr` as ipAddr,`call_addr` as callAddr,`yn`
+        FROM `node_info`
+        where `yn` = 0
+        limit #{offset},#{rows}
+    </select>
+
+    <select id="getCount" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM `node_info`
+        where `yn` = 0
+    </select>
+
+
+    <update id="add" parameterType="com.sys.mgr.model.NodeInfo">
+        insert into node_info
+       (node_code,node_name,yn,create_time,create_pin) VALUES
+       (
+        #{nodeCode},
+        #{nodeName},
+        0,
+        now(),
+        #{createPin}
+       )
+    </update>
+
+
+    <update id="delete">
+        update node_info
+        set `yn` = 1,`update_time` = now(),`update_pin` = #{pin}
+        where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+
+    <select id="query" resultType="com.sys.mgr.model.NodeInfo">
+        SELECT `id` ,`node_code` as nodeCode,`node_name` as nodeName,
+        `ip_addr` as ipAddr,`call_addr` as callAddr,`yn`
+        FROM `node_info`
+        where `yn` = 0 and id=#{id}
+    </select>
+
+
+    <update id="update" parameterType="com.sys.mgr.model.NodeInfo">
+        update node_info
+        <set>
+            <if test="nodeCode != null">
+                node_code = #{nodeCode},
+            </if>
+            <if test="nodeName != null">
+                node_name = #{nodeName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
