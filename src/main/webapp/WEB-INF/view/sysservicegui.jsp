@@ -30,7 +30,7 @@
 
     $(function () {
         $.ajax({
-            url: "/syscallrelagui/getsyscount.do",
+            url: "/sysservicegui/getsyscount.do",
             dataType: "json",
             type: "post",
             async: false,
@@ -53,7 +53,7 @@
         var result = [];
         var temp = {};
         $.ajax({
-            url: "/syscallrelagui/getsysname.do",
+            url: "/sysservicegui/getsysname.do",
             dataType: "json",
             type: "post",
             async: false,
@@ -76,7 +76,7 @@
         var result = [];
         var temp = {};
         $.ajax({
-            url: "/syscallrelagui/getsysname.do",
+            url: "/sysservicegui/getsysname.do",
             type: "post",
             contentType: "json",
             async: false,

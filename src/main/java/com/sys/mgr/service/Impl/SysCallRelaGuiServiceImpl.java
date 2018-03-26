@@ -5,6 +5,7 @@ import com.sys.mgr.service.SysCallRelaGuiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,9 @@ public class SysCallRelaGuiServiceImpl implements SysCallRelaGuiService{
 
     @Override
     public List<String> getSysName() {
-        return sysCallRelaGuiDao.getSysName();
+
+        List<String> list =sysCallRelaGuiDao.getSysName();
+        return list;
     }
 
     @Override

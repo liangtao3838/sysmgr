@@ -3,7 +3,7 @@
 <mapper namespace="com.sys.mgr.dao.SysCallRelaGuiDao">
 
     <select id="getSysName" resultType="java.lang.String">
-        select ni.node_code,ni.node_name
+        select ni.node_name
         from sys_call_rela scr
         left join node_info ni
         on scr.now_route_node=ni.node_code
@@ -12,12 +12,14 @@
 
 
     <select id="getSysSuccCount" resultType="java.lang.Integer">
-
+        select count(*) from trade_detail
+        where zt = 0 and mbxt=#{sysname}
     </select>
 
 
     <select id="getSysFailCount" resultType="java.lang.Integer">
-
+        select count(*) from trade_detail
+        where zt = 1 and mbxt=#{sysname}
     </select>
 
 

@@ -70,7 +70,22 @@
                         <li><a href="sysservice/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务调用配置管理</span></a></li>
                     </ul>
                 </li>
-
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-files-o"></i>
+                        <span>大屏界面展示</span>
+                        <span class="label label-primary pull-right">3</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/syscallrelagui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统监控功能图</span></a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="/sysservicegui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务监控功能图</span></a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="/tradedetail/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>交易明细</span></a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
     </aside>

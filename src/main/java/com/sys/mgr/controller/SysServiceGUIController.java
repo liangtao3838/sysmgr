@@ -1,6 +1,6 @@
 package com.sys.mgr.controller;
 
-import com.sys.mgr.service.SysCallRelaGuiService;
+import com.sys.mgr.service.SysServiceGuiService;
 import com.sys.mgr.utils.JsonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,29 +17,29 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by liangtao on 2018/3/20.
+ * Created by liangtao on 2018/3/25.
+ *
  */
-@RequestMapping("/syscallrelagui")
+@RequestMapping("/sysservicegui")
 @Controller
-public class SysCallRelaGuiController {
+public class SysServiceGuiController {
 
-    private final static Logger log = LoggerFactory.getLogger(SysCallRelaGuiController.class);
+    private final static Logger log = LoggerFactory.getLogger(SysServiceGuiController.class);
 
     @Autowired
-    SysCallRelaGuiService sysCallRelaGuiService;
+    SysServiceGuiService sysServiceGuiService;
 
-    @RequestMapping("/index")
+    @RequestMapping("index")
     public ModelAndView index(){
-        return new ModelAndView("syscallrelagui");
+        return new ModelAndView("sysservicegui");
     }
-
 
     @RequestMapping("/getsysname")
     @ResponseBody
     public JsonResponse getSysName(){
         long tid = System.nanoTime();
         try {
-            List<String> sysname = sysCallRelaGuiService.getSysName();
+            List<String> sysname = sysServiceGuiService.getServiceName();
             sysname.add(0,"企业服务总线");
             Map<String,Object> resultMap = new HashMap<String, Object>();
             resultMap.put("sysname",sysname);
@@ -50,28 +50,26 @@ public class SysCallRelaGuiController {
         }
     }
 
-
     @RequestMapping("/getsyscount")
     @ResponseBody
     public JsonResponse getsyscount(){
         long tid = System.nanoTime();
         try {
-            List<String> sysname = sysCallRelaGuiService.getSysName();
+            List<String> sysname = sysServiceGuiService.getServiceName();
             List<String> count = new ArrayList<String>();
             if(!CollectionUtils.isEmpty(sysname)){
                 for(String str:sysname){
-                    Integer succNum = sysCallRelaGuiService.getSysSuccCount(str);
-                    Integer failNum = sysCallRelaGuiService.getSysFailCount(str);
+                    Integer succNum = sysServiceGuiService.getSuccCount(str);
+                    Integer failNum = sysServiceGuiService.getFailCount(str);
                     count.add(str+","+succNum+","+failNum);
-               }
+                }
             }
             Map<String,Object> resultMap = new HashMap<String, Object>();
             resultMap.put("count",count);
             return new JsonResponse(resultMap);
         }catch (Exception e){
-            log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
+            log.error("tid:{} 获取服务调用关系系统名称异常",tid,e);
             return new JsonResponse("error");
         }
     }
-
 }

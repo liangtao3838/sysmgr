@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mgr.dao.SysServiceGuiDao">
+
+    <select id="getServiceName" resultType="java.lang.String">
+        select ni.node_name
+        from sys_service ss
+        left join node_info ni
+        on ss.node_code=ni.node_code
+        where ss.yn=0 and ni.node_name is not null
+    </select>
+
+
+    <select id="getSuccCount" resultType="java.lang.Integer">
+        select count(*) from trade_detail
+        where zt = 0 and jkmc=#{serviceName}
+    </select>
+
+
+    <select id="getFailCount" resultType="java.lang.Integer">
+        select count(*) from trade_detail
+        where zt = 1 and jkmc=#{serviceName}
+    </select>
+
+
+</mapper>
