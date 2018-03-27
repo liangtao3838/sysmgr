@@ -42,7 +42,7 @@
     <table class="table" width="100%">
         <div class="operDiv">
             <span class="msgSpan"></span>
-            <button type="button" class="btn btn-info"  onclick="query()">查询</button>
+            <%--<button type="button" class="btn btn-info"  onclick="query()">查询</button>--%>
             <button type="button" class="btn btn-warning"  onclick="insert()">新增</button>
             <button type="button" class="btn btn-primary"  onclick="update()">修改</button>
             <button type="button" class="btn btn-danger"   onclick="deleteRecord()">删除</button>
@@ -127,6 +127,7 @@
 <script src="<%=basePath%>/bootstrap/bootstrap-3.3.5/js/bootstrap-table.min.js"></script>
 <script src="<%=basePath%>/bootstrap/bootstrap-3.3.5/js/bootstrap-table-zh-CN.min.js"></script>
 <script src="<%=basePath%>/bootstrap/bootstrap-3.3.5/js/autosuggest.js"></script>
+<script src="<%=basePath%>/bootstrap/bootstrap-3.3.5/js/bootstrap-select.js"></script>
 <script src="<%=basePath%>/bootstrap/AdminLTE-2.3.0/plugins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
 <script src="<%=basePath%>/js/common/common.js"></script>
 <script src="<%=basePath%>/js/nodeinfo/index.js"></script>

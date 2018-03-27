@@ -61,9 +61,9 @@
                 var nodes=data.result.sysname;
                 $.each(nodes, function(i, item){
                     if(i==0){
-                        temp = {category:0, name:item, value:2, label:item};
+                        temp = {category:0, name:item, value:4, label:item};
                     }else{
-                        temp = {category:1, name:item, value:0, label:item};
+                        temp = {category:1, name:item, value:2, label:item};
                     }
                     result.push(temp);
                 })

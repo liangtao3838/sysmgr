@@ -39,7 +39,7 @@
 <div class="panel panel-primary" style="margin-top: 10px; margin-left: 4px; margin-right: 4px">
     <div class="operDiv">
         <span class="msgSpan"></span>
-        <button type="button" class="btn btn-info"  onclick="query()">查询</button>
+        <%--<button type="button" class="btn btn-info"  onclick="query()">查询</button>--%>
         <button type="button" class="btn btn-warning"  onclick="add()">新增</button>
         <button type="button" class="btn btn-primary"  onclick="update()">修改</button>
         <button type="button" class="btn btn-danger"   onclick="del()">删除</button>

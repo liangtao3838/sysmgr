@@ -1,6 +1,8 @@
 $(function () {
     InitSysServiceQueryTableParam();
 });
+var curField = 0;
+var selectValue;
 function InitSysServiceQueryTableParam() {
     $('#sysServiceQueryTable').bootstrapTable('destroy');
     $('#sysServiceQueryTable').bootstrapTable({
@@ -33,18 +35,21 @@ function InitSysServiceQueryTableParam() {
         sidePagination: "server",
         search: false,
         strictSearch: true,
+        singleSelect:true,
+        clickToSelect: true,
         responseHandler : function(res) {
             return res.result;
         },
-        columns: [{
-            field: 'id',
-            title: "<input type='checkbox' id='check-all' name='check-all' >全选",
-            width: '10%',
-            formatter:function(value,row,index){
-                var html;
-                var html = "<input type=\"checkbox\" name=\"chkbox_pop\" value='"+row.id+"'/>";
-                return html;
+        onCheck: function (row, $element) {
+            if (curField === 0) {
+                selectValue=row;
+            } else {
+                curField = 0;
             }
+        },
+        columns: [{
+            field:'check',
+            radio: 'true'
         },{
             field: 'serviceName',
             title: '服务名称',
@@ -72,17 +77,17 @@ function InitSysServiceQueryTableParam() {
         }],
     });
 
-    //一：全选操作
-    $("#check-all").click(function(){
-        var checked = $(this).is(":checked");
-        $('input[name="chkbox_pop"]').each(function(){
-            if(checked){
-                this.checked = "checked";
-            }else{
-                this.checked = "";
-            }
-        });
-    });
+    ////一：全选操作
+    //$("#check-all").click(function(){
+    //    var checked = $(this).is(":checked");
+    //    $('input[name="chkbox_pop"]').each(function(){
+    //        if(checked){
+    //            this.checked = "checked";
+    //        }else{
+    //            this.checked = "";
+    //        }
+    //    });
+    //});
 };
 //init end
 
@@ -160,11 +165,16 @@ $("#submitBtn_sysservice").click(function(){
 });
 
 function update(){
-    var idArr = new Array();
-    $('input[name="chkbox_pop"]:checked').each(function(){
-        idArr.push($(this).val());
-    });
-    var id = idArr[0];
+    if(typeof(selectValue) == "undefined"){
+        $.dialog.error("请选中一行记录");
+        return;
+    }
+    if (!selectValue && typeof(selectValue)!="undefined" && selectValue!=0)
+    {
+        $.dialog.error("请选中一行记录");
+        return;
+    }
+    var id=selectValue.id;
     $.ajax({
         type: "POST",
         url: "/sysservice/query.do",
@@ -210,22 +220,24 @@ $("#submitBtn_updatesysservice").click(function(){
 
 //删除记录（修改状态）
 function del(){
-    var idArr = new Array();
-    $('input[name="chkbox_pop"]:checked').each(function(){
-        idArr.push($(this).val());
-    });
-    if(idArr.length == 0){
-        $.dialog.alert("提示：没有记录选中!");
-        return ;
+    if(typeof(selectValue) == "undefined"){
+        $.dialog.error("请选中一行记录");
+        return;
     }
-    var information = "确定要删除该"+idArr.length+"条数据";
+    if (!selectValue && typeof(selectValue)!="undefined" && selectValue!=0)
+    {
+        $.dialog.error("请选中一行记录");
+        return;
+    }
+    var id=selectValue.id;
+    var information = "确定要删除该条数据";
     if(confirm(information)){
         idArr = idArr.toString();
         $.ajax({
             type: "POST",
             url: "/sysservice/delete.do",
             data: {
-                idlist : idArr
+                idlist : id
             },
             dataType: "json",
             success: function(data){
