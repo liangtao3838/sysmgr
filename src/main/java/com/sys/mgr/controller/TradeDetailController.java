@@ -39,13 +39,18 @@ public class TradeDetailController {
     @RequestMapping("list")
     @ResponseBody
     public JsonResponse getList(
+            @RequestParam(value = "syscallname") String syscallname,
+            @RequestParam(value = "qqxt") String qqxt,
+            @RequestParam(value = "zt") String zt,
+            @RequestParam(value = "startDate") String startDate,
+            @RequestParam(value = "endDate") String endDate,
             @RequestParam(value = "page",  defaultValue = "0") Integer offset,
             @RequestParam(value = "rows",  defaultValue = "10") Integer rows){
         long tid = System.nanoTime();
         try{
-            List<TradeDetail> list =  tradeDetailService.getList(tid,offset,rows);
+            List<TradeDetail> list =  tradeDetailService.getList(tid,syscallname,qqxt,zt,startDate,endDate,offset,rows);
             Map<String,Object> result = new HashMap<String,Object>();
-            long count=tradeDetailService.getCount(tid);
+            long count=tradeDetailService.getCount(tid,syscallname,qqxt,zt,startDate,endDate);
             result.put("rows",list);
             result.put("total",count);
             return new JsonResponse(result);

@@ -18,13 +18,13 @@ public class TradeDetailServiceImpl implements TradeDetailService {
     TradeDetailDao tradeDetailDao;
 
     @Override
-    public List<TradeDetail> getList(long tid,Integer offset, Integer rows) {
-        return tradeDetailDao.getList(offset,rows);
+    public List<TradeDetail> getList(long tid,String syscallname,String qqxt,String zt,String startDate,String endDate,Integer offset, Integer rows) {
+        return tradeDetailDao.getList(syscallname,qqxt,zt,startDate,endDate,offset,rows);
     }
 
     @Override
-    public Long getCount(long tid) {
-        return tradeDetailDao.getCount();
+    public Long getCount(long tid,String syscallname,String qqxt,String zt,String startDate,String endDate) {
+        return tradeDetailDao.getCount(syscallname,qqxt,zt,startDate,endDate);
     }
 
     @Override

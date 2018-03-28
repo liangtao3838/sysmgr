@@ -34,9 +34,19 @@
             pageList: [10,25,50,100],
             url: "/tradedetail/list.do",
             queryParams: function(params) {
+                var syscallname = document.getElementById("syscallname").value;
+                var qqxt = document.getElementById("qqxt").value;
+                var zt = $('#zt option:selected').val();
+                var startDate = document.getElementById("startDate").value;
+                var endDate = document.getElementById("endDate").value;
                 return {
                     page: params.offset,
                     rows: params.limit,
+                    syscallname:syscallname,
+                    qqxt:qqxt,
+                    zt:zt,
+                    startDate:startDate,
+                    endDate:endDate,
                 };
             },
             sidePagination: "server",

@@ -49,18 +49,19 @@
                         <span class="input-group-addon">请求系统</span>
                         <input name = "qqxt" id="qqxt" type="text" class="form-control" placeholder="请求系统">
                         <span class="input-group-addon">业务异常状态</span>
-                        <input name = "zt" id="zt" type="text" class="form-control">
+                        <select id="zt" name="zt" style="width: 80px;" class="form-control">
+                            <option value="0">成功</option>
+                            <option value="1">失败</option>
+                        </select>
                         <span class="input-group-addon">录入日期起</span>
                         <input name = "date" id="startDate" type="text" class="form-control">
                         <span class="input-group-addon">录入日期止</span>
                         <input name = "date" id="endDate" type="text" class="form-control">
                     </div>
+                    <button type="button" class="btn btn-info" onclick="query()">查询</button>
                 </td>
             </tr>
         </table>
-        <div class="operDiv">
-            <span class="msgSpan"></span>
-        </div>
     </table>
 </div>
 

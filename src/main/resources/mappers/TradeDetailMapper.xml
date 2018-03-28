@@ -6,12 +6,44 @@
         SELECT `id` ,`uuid`,`jkmc`, `qqxt`,`mbxt`,`mbjk`,`qqxml`,`fhxml`,`xyxml`,`ycxx`,
         `jdwz`,`zt`,`lrrq`,`jyhs`
         FROM `trade_detail`
+        where 1=1
+        <if test="syscallname != null and syscallname !=''">
+            and jkmc = #{syscallname}
+        </if>
+        <if test="qqxt != null and qqxt !=''">
+            and qqxt = #{qqxt}
+        </if>
+        <if test="zt != null and zt !=''">
+            and zt = #{zt}
+        </if>
+        <if test="startDate != null and startDate !=''">
+            and lrrq &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate !=''">
+            and lrrq &lt;= #{endDate}
+        </if>
         limit #{offset},#{rows}
     </select>
 
     <select id="getCount" resultType="java.lang.Long">
         SELECT count(*)
         FROM `trade_detail`
+        where 1=1
+        <if test="syscallname != null and syscallname !=''">
+            and jkmc = #{syscallname}
+        </if>
+        <if test="qqxt != null and qqxt !=''">
+            and qqxt = #{qqxt}
+        </if>
+        <if test="zt != null and zt !=''">
+            and zt = #{zt}
+        </if>
+        <if test="startDate != null and startDate !=''">
+            and lrrq &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate !=''">
+            and lrrq &lt;= #{endDate}
+        </if>
     </select>
 
     <select id="getXMl" resultType="java.lang.String">

@@ -12,9 +12,21 @@ import java.util.List;
 @Repository
 public interface TradeDetailDao {
 
-    List<TradeDetail> getList(@Param("offset") Integer offset,@Param("rows") Integer rows);
+    List<TradeDetail> getList(
+            @Param("syscallname") String syscallname,
+            @Param("qqxt") String qqxt,
+            @Param("zt") String zt,
+            @Param("startDate") String startDate,
+            @Param("endDate") String endDate,
+            @Param("offset") Integer offset,
+            @Param("rows") Integer rows);
 
-    Long getCount();
+    Long getCount(
+            @Param("syscallname") String syscallname,
+            @Param("qqxt") String qqxt,
+            @Param("zt") String zt,
+            @Param("startDate") String startDate,
+            @Param("endDate") String endDate);
 
     String getXMl(@Param("id") Long id,@Param("type") String type);
 }

@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface TradeDetailService {
 
-    List<TradeDetail> getList(long tid,Integer offset, Integer rows);
+    List<TradeDetail> getList(long tid,String syscallname,String qqxt,String zt,String startDate,String endDate,Integer offset, Integer rows);
 
-    Long getCount(long tid);
+    Long getCount(long tid,String syscallname,String qqxt,String zt,String startDate,String endDate);
 
     String getXMl(long id,String type);
 }
