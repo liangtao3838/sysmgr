@@ -1,5 +1,6 @@
 package com.sys.mgr.dao;
 
+import com.sys.mgr.model.NodeInfoVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,9 @@ import java.util.List;
 @Repository
 public interface SysCallRelaGuiDao {
 
-    List<String> getSysName();
+    List<NodeInfoVo> getSysName();
+
+    List<String> getSysNameXXX();
 
     Integer getSysSuccCount(@Param("sysname") String sysname);
 

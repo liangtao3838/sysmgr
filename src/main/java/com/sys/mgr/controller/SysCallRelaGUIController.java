@@ -1,5 +1,6 @@
 package com.sys.mgr.controller;
 
+import com.sys.mgr.model.NodeInfoVo;
 import com.sys.mgr.service.SysCallRelaGuiService;
 import com.sys.mgr.utils.JsonResponse;
 import org.slf4j.Logger;
@@ -39,7 +40,7 @@ public class SysCallRelaGuiController {
     public JsonResponse getSysName(){
         long tid = System.nanoTime();
         try {
-            List<String> sysname = sysCallRelaGuiService.getSysName();
+            List<String> sysname = sysCallRelaGuiService.getSysNameXXX();
             sysname.add(0,"企业服务总线");
             Map<String,Object> resultMap = new HashMap<String, Object>();
             resultMap.put("sysname",sysname);
@@ -56,7 +57,7 @@ public class SysCallRelaGuiController {
     public JsonResponse getsyscount(){
         long tid = System.nanoTime();
         try {
-            List<String> sysname = sysCallRelaGuiService.getSysName();
+            List<String> sysname = sysCallRelaGuiService.getSysNameXXX();
             List<String> count = new ArrayList<String>();
             if(!CollectionUtils.isEmpty(sysname)){
                 for(String str:sysname){

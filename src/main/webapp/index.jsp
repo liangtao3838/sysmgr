@@ -62,12 +62,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="nodeinfo/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>节点配置管理</span></a></li>
-                    </ul>
-                    <ul class="treeview-menu">
-                        <li><a href="syscallrela/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统调用配置管理</span></a></li>
-                    </ul>
-                    <ul class="treeview-menu">
                         <li><a href="sysservice/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务调用配置管理</span></a></li>
+                        <li><a href="syscallrela/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统调用配置管理</span></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -78,11 +74,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/syscallrelagui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统监控功能图</span></a></li>
-                    </ul>
-                    <ul class="treeview-menu">
                         <li><a href="/sysservicegui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务监控功能图</span></a></li>
-                    </ul>
-                    <ul class="treeview-menu">
                         <li><a href="/tradedetail/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>交易明细</span></a></li>
                     </ul>
                 </li>
@@ -95,12 +87,12 @@
     </div><!-- /.content-wrapper -->
 
 
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.0
-        </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-    </footer>
+    <%--<footer class="main-footer">--%>
+        <%--<div class="pull-right hidden-xs">--%>
+            <%--<b>Version</b> 2.3.0--%>
+        <%--</div>--%>
+        <%--<strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.--%>
+    <%--</footer>--%>
 
 
     <aside class="control-sidebar control-sidebar-dark">
