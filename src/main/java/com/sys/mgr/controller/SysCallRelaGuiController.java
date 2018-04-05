@@ -1,6 +1,5 @@
 package com.sys.mgr.controller;
 
-import com.sys.mgr.model.NodeInfoVo;
 import com.sys.mgr.service.SysCallRelaGuiService;
 import com.sys.mgr.utils.JsonResponse;
 import org.dom4j.Document;
