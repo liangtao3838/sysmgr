@@ -45,7 +45,10 @@ public class SysCallRelaGuiServiceImpl implements SysCallRelaGuiService{
                     nodeInfos1.add(nodeInfo);
                     map.put(nodeInfo.getNowRouteNode(),list);
                 }
+            }else {
+
             }
+
             if(map.containsKey(nodeInfo.getNowRouteNode())){
             }
         }
