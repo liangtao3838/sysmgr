@@ -78,7 +78,7 @@ public class SysCallRelaGuiController {
     }
 
     private String getXMl(List<List<String>> lists){
-
+        //生成xml
         Document document = DocumentHelper.createDocument();
         Element root = document.addElement("gexf","http://www.gexf.net/1.2draft");
         root.addAttribute("version", "2.0");
