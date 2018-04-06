@@ -38,7 +38,7 @@ public class TradeDetailController {
 
     @RequestMapping("list")
     @ResponseBody
-    public JsonResponse getList(
+    public String getList(
             @RequestParam(value = "syscallname") String syscallname,
             @RequestParam(value = "qqxt") String qqxt,
             @RequestParam(value = "zt") String zt,
@@ -53,17 +53,17 @@ public class TradeDetailController {
             long count=tradeDetailService.getCount(tid,syscallname,qqxt,zt,startDate,endDate);
             result.put("rows",list);
             result.put("total",count);
-            return new JsonResponse(result);
+            return new JsonResponse(result).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取交易明细异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
 
     @RequestMapping("getxml")
     @ResponseBody
-    public JsonResponse getXml(
+    public String getXml(
             @RequestParam(value = "id") Long id,
             @RequestParam(value = "type") String type){
         long tid = System.nanoTime();
@@ -72,10 +72,10 @@ public class TradeDetailController {
             if(StringUtils.isEmpty(data)){
                 data = "woshinidaye";
             }
-            return new JsonResponse(data);
+            return new JsonResponse(data).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取交易相应明细异常,id:{},type",tid,id,type,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 }

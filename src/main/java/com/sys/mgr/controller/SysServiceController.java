@@ -39,7 +39,7 @@ public class SysServiceController {
 
     @RequestMapping("list")
     @ResponseBody
-    public JsonResponse getList(
+    public String getList(
             @RequestParam(value = "page",  defaultValue = "0") Integer offset,
             @RequestParam(value = "rows",  defaultValue = "10") Integer rows){
         long tid = System.nanoTime();
@@ -49,66 +49,66 @@ public class SysServiceController {
             long count=sysServiceService.getCount(tid);
             result.put("rows",list);
             result.put("total",count);
-            return new JsonResponse(result);
+            return new JsonResponse(result).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取服务调用关系异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("add")
     @ResponseBody
-    public JsonResponse add(@RequestBody SysService info){
+    public String add(@RequestBody SysService info){
         long tid = System.nanoTime();
         try{
             boolean result = sysServiceService.add(info);
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加服务调用关系异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
 
     @RequestMapping("update")
     @ResponseBody
-    public JsonResponse update(@RequestBody SysService info){
+    public String update(@RequestBody SysService info){
         long tid = System.nanoTime();
         try{
             boolean result = sysServiceService.update(info);
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加服务关系信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("delete")
     @ResponseBody
-    public JsonResponse del(
+    public String del(
             @RequestParam(value = "idlist") String idlist
     ){
         long tid = System.nanoTime();
         List<Long> ids= CommonUtil.splitId(tid,idlist);
         try{
             boolean result = sysServiceService.delete(ids,"test");
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加服务关系信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("query")
     @ResponseBody
-    public JsonResponse query(String id){
+    public String query(String id){
         long tid = System.nanoTime();
         try{
             SysService sysService = sysServiceService.query(tid,Long.parseLong(id));
-            return new JsonResponse(sysService);
+            return new JsonResponse(sysService).toJSON();
         }catch (Exception e){
             log.error("tid:{} 查询服务关系信息异常,id:{}",tid,id,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 

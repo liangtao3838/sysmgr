@@ -37,7 +37,7 @@ public class SysCallRelaController {
 
     @RequestMapping("list")
     @ResponseBody
-    public JsonResponse getList(
+    public String getList(
             @RequestParam(value = "page",  defaultValue = "0") Integer offset,
             @RequestParam(value = "rows",  defaultValue = "10") Integer rows
     ){
@@ -48,65 +48,65 @@ public class SysCallRelaController {
             long count=sysCallRelaService.getCount(tid);
             result.put("rows",list);
             result.put("total",count);
-            return new JsonResponse(result);
+            return new JsonResponse(result).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("add")
     @ResponseBody
-    public JsonResponse add(@RequestBody SysCallRela info){
+    public String add(@RequestBody SysCallRela info){
         long tid = System.nanoTime();
         try{
             boolean result = sysCallRelaService.add(info);
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加系统调用关系异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("update")
     @ResponseBody
-    public JsonResponse update(@RequestBody SysCallRela info){
+    public String update(@RequestBody SysCallRela info){
         long tid = System.nanoTime();
         try{
             boolean result = sysCallRelaService.update(info);
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加调用关系信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("delete")
     @ResponseBody
-    public JsonResponse del(
+    public String del(
             @RequestParam(value = "idlist") String idlist
     ){
         long tid = System.nanoTime();
         List<Long> ids= CommonUtil.splitId(tid,idlist);
         try{
             boolean result = sysCallRelaService.delete(ids,"test");
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加调用关系信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("query")
     @ResponseBody
-    public JsonResponse query(String id){
+    public String query(String id){
         long tid = System.nanoTime();
         try{
             SysCallRela sysCallRela = sysCallRelaService.query(tid,Long.parseLong(id));
-            return new JsonResponse(sysCallRela);
+            return new JsonResponse(sysCallRela).toJSON();
         }catch (Exception e){
             log.error("tid:{} 查询调用关系信息异常,id:{}",tid,id,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 

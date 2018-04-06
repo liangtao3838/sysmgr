@@ -5,14 +5,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        html, body, #main {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0
-        }
-    </style>
     <script type="text/javascript" src="/echarts/js/echarts.min.js"></script>
     <script type="text/javascript" src="/echarts/js/echarts-gl.min.js"></script>
     <script type="text/javascript" src="/echarts/js/ecStat.min.js"></script>
@@ -21,37 +13,65 @@
     <script type="text/javascript" src="/echarts/js/jquery-3.3.1.min.js"></script>
 </head>
 <body style="height: 100%; margin: 0">
-<div id="container" style="height: 100%; background: black;" ></div>
-
-
+<div id="main">
+    <div id="left" style="float:left ;  width:40%;  height:100%;">
+        <span>监控周期</span>
+        <select style="width:50px;">
+            <option value ="hour">小时</option>
+            <option value ="minutes">五分钟</option>
+            <option value ="day">天</option>
+        </select>
+        <div id="sysrole" style="margin-top: 100px;">
+        </div>
+    </div>
+    <div id="right" style="float:left ; background-color: #0f0f0f; width:60%; height:100%;"></div>
+</div>
 <script type="text/javascript">
-    var dom = document.getElementById("container");
+
+    $(function () {
+        $.ajax({
+            url: "/syscallrelagui/getsyscount.do",
+            dataType: "json",
+            type: "post",
+            async: false,
+            success : function(data){
+                var nodes=data.result.count;
+                var content = "";
+                $.each(nodes, function(i, item){
+                    var arr = item.split(",");
+                    content += '<span>'+arr[0]+'系统</span></br>';
+                    content += '<input type="text" readonly value="'+arr[1]+'">';
+                    content += '<input type="text" readonly value="'+arr[2]+'">';
+                    content += '</br>'
+                })
+                $("#sysrole").html(content);
+            },
+        });
+    });
+
+    var dom = document.getElementById("right");
     var myChart = echarts.init(dom);
     var app = {};
     option = null;
     app.title = '力引导布局';
-
     myChart.showLoading();
     $.get('/syscallrelagui/getsysname.do', function (xml) {
         myChart.hideLoading();
-
         var graph = echarts.dataTool.gexf.parse(xml);
         var categories = [];
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < graph.nodes.length; i++) {
             categories[i] = {
-                name: '类目' + i
+                name: graph.nodes[i].name
             };
         }
         graph.nodes.forEach(function (node) {
             node.itemStyle = null;
-            node.symbolSize = 80;
+            node.symbolSize = 50;
             node.value = node.symbolSize;
             node.category = node.attributes.modularity_class;
-            // Use random x, y
             node.x = node.y = null;
             node.draggable = true;
             node.onclick = function(){
-                alert("aaa");
             }
         });
         option = {
@@ -63,7 +83,6 @@
             },
             tooltip: {},
             legend: [{
-                // selectedMode: 'single',
                 data: categories.map(function (a) {
                     return a.name;
                 })
@@ -84,7 +103,7 @@
                         }
                     },
                     force: {
-                        repulsion: 4000
+                        repulsion: 1000
                     }
                 }
             ]

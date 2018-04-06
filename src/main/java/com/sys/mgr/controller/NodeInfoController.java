@@ -38,7 +38,7 @@ public class NodeInfoController {
 
     @RequestMapping("list")
     @ResponseBody
-    public JsonResponse getList(
+    public String getList(
             @RequestParam(value = "page",  defaultValue = "0") Integer offset,
             @RequestParam(value = "rows",  defaultValue = "10") Integer rows){
         long tid = System.nanoTime();
@@ -48,65 +48,65 @@ public class NodeInfoController {
             long count=nodeInfoServiceImpl.getCount();
             result.put("rows",list);
             result.put("total",count);
-            return new JsonResponse(result);
+            return new JsonResponse(result).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取节点信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("add")
     @ResponseBody
-    public JsonResponse add(@RequestBody NodeInfo info){
+    public String  add(@RequestBody NodeInfo info){
         long tid = System.nanoTime();
         try{
             boolean result = nodeInfoServiceImpl.add(info);
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加节点信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("update")
     @ResponseBody
-    public JsonResponse update(@RequestBody NodeInfo info){
+    public String update(@RequestBody NodeInfo info){
         long tid = System.nanoTime();
         try{
             boolean result = nodeInfoServiceImpl.update(info);
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加节点信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("delete")
     @ResponseBody
-    public JsonResponse del(
+    public String del(
             @RequestParam(value = "idlist") String idlist
     ){
         long tid = System.nanoTime();
         List<Long> ids= CommonUtil.splitId(tid,idlist);
         try{
             boolean result = nodeInfoServiceImpl.delete(ids,"test");
-            return new JsonResponse("ok");
+            return new JsonResponse("ok").toJSON();
         }catch (Exception e){
             log.error("tid:{} 添加节点信息异常",tid,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
     @RequestMapping("query")
     @ResponseBody
-    public JsonResponse query(String id){
+    public String query(String id){
         long tid = System.nanoTime();
         try{
             NodeInfo nodeInfo = nodeInfoServiceImpl.query(tid,Long.parseLong(id));
-            return new JsonResponse(nodeInfo);
+            return new JsonResponse(nodeInfo).toJSON();
         }catch (Exception e){
             log.error("tid:{} 查询节点信息异常,id:{}",tid,id,e);
-            return JsonResponse.errorResponse(-1,"error");
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 }

@@ -1,4 +1,7 @@
 package com.sys.mgr.utils;
+
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * Created by liangtao on 2018/3/16.
  */
@@ -98,4 +101,9 @@ public final class JsonResponse<T> {
     public void setResult(T result) {
         this.result = result;
     }
+
+    public String toJSON(){
+        return JSONObject.toJSONString(this);
+    }
+
 }

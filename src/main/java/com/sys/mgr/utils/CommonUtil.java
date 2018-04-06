@@ -14,11 +14,11 @@ public class CommonUtil {
 
     private static final Logger log = LoggerFactory.getLogger(CommonUtil.class);
 
-    private static byte[] b = new byte[1000];
+    private static byte[] b = new byte[10000];
 
     static{
         for(int i = 0;i<b.length ;i++){
-            b[i] = (byte)(i%2 == 0?(-1)*new Random().nextInt(128):new Random().nextInt(128));
+            b[i] = (byte)(i%2 == 0?(-1)*new Random().nextInt(1280):new Random().nextInt(1280));
         }
     }
 

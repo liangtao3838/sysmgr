@@ -4,6 +4,7 @@ import com.sys.mgr.model.NodeInfoVo;
 import com.sys.mgr.service.SysCallRelaGuiService;
 import com.sys.mgr.utils.CommonUtil;
 import com.sys.mgr.utils.JsonResponse;
+import org.apache.tools.ant.taskdefs.optional.ejb.JonasDeploymentTool;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -56,10 +57,22 @@ public class SysCallRelaGuiController {
         }
     }
 
+    @RequestMapping("/getNodeInfo")
+    @ResponseBody
+    public String getNodeInfo(){
+        long tid = System.nanoTime();
+        try {
+            List<NodeInfoVo> nodeInfoVos = sysCallRelaGuiService.getSysName();
+            return new JsonResponse(nodeInfoVos).toJSON();
+        }catch (Exception e){
+            log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
+            return JsonResponse.errorResponse(-1,"查询异常").toJSON();
+        }
+    }
 
     @RequestMapping("/getsyscount")
     @ResponseBody
-    public JsonResponse getsyscount(){
+    public String getsyscount(){
         long tid = System.nanoTime();
         try {
             List<String> sysname = sysCallRelaGuiService.getSysNameXXX();
@@ -73,10 +86,10 @@ public class SysCallRelaGuiController {
             }
             Map<String,Object> resultMap = new HashMap<String, Object>();
             resultMap.put("count",count);
-            return new JsonResponse(resultMap);
+            return new JsonResponse(resultMap).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
-            return new JsonResponse("error");
+            return new JsonResponse("error").toJSON();
         }
     }
 
