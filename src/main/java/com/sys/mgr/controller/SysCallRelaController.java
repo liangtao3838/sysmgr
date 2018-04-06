@@ -1,6 +1,5 @@
 package com.sys.mgr.controller;
 
-import com.sys.mgr.model.NodeInfo;
 import com.sys.mgr.model.SysCallRela;
 import com.sys.mgr.service.SysCallRelaService;
 import com.sys.mgr.utils.CommonUtil;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

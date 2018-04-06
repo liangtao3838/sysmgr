@@ -62,8 +62,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="nodeinfo/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>节点配置管理</span></a></li>
-                        <li><a href="sysservice/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务调用配置管理</span></a></li>
                         <li><a href="syscallrela/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统调用配置管理</span></a></li>
+                        <li><a href="sysservice/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务调用配置管理</span></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
