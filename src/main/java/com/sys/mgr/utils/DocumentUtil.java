@@ -1,23 +1,30 @@
 package com.sys.mgr.utils;
 
+import com.sys.mgr.model.NodeInfoVo;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
  * Created by liangtao on 2018/4/2.
  */
-public class Documenttest {
+public class DocumentUtil {
 
-    public static void main(String[] args){
-
+    public static String getXMl(Map<String,List<NodeInfoVo>> map){
+        //生成xml
         Document document = DocumentHelper.createDocument();
         Element root = document.addElement("gexf","http://www.gexf.net/1.2draft");
+        root.addAttribute("version", "2.0");
         root.addAttribute("xmlns:viz","http://www.gexf.net/1.2draft/viz");
         root.addAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
         root.addAttribute("xsi:schemaLocation","http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd");
-        root.addAttribute("version", "2.0");
+
         //meta 标签
         Element metas = root.addElement("meta");
         metas.addAttribute("lastmodifieddate","2014-01-30");
@@ -40,9 +47,23 @@ public class Documenttest {
         attribute.setText("");
         //graph--><nodes>
         Element nodes = graph.addElement("nodes");
-        Element node = nodes.addElement("node");
-        node.addAttribute("id","0");
-        node.addAttribute("label","Myriel");
+        Element edges = graph.addElement("edges");
+        if(map == null || map.isEmpty()){
+            return document.asXML();
+        }
+        List<Element> elements = new ArrayList<Element>();
+        for(Map.Entry<String,List<NodeInfoVo>> entry : map.entrySet()){
+            generateNode(entry.getKey(),nodes);
+            generateEdge(entry.getValue(),edges);
+        }
+        return document.asXML();
+    }
+
+    private static Element generateNode(String nodeName,Element element){
+
+        Element node = element.addElement("node");
+        node.addAttribute("id",nodeName);
+        node.addAttribute("label",nodeName);
         ////graph--><nodes>-->node-->....
         Element attvalues = node.addElement("attvalues");
         Element attvalue = attvalues.addElement("attvalue");
@@ -52,24 +73,36 @@ public class Documenttest {
         Element viz_size = attvalues.addElement("viz:size","http://www.gexf.net/1.2draft/viz");
         viz_size.addAttribute("value","28.685715");
         viz_size.setText("");
+
         Element viz_position = attvalues.addElement("viz:position","http://www.gexf.net/1.2draft/viz");
-        viz_position.addAttribute("x","-266.82776");
-        viz_position.addAttribute("y","299.6904");
-        viz_position.addAttribute("z","0.0");
+        viz_position.addAttribute("x",CommonUtil.getRandomValue());
+        viz_position.addAttribute("y",CommonUtil.getRandomValue());
+        viz_position.addAttribute("z",CommonUtil.getRandomValue());
         viz_position.setText("");
+
         Element viz_color = attvalues.addElement("viz:color","http://www.gexf.net/1.2draft/viz");
         viz_color.addAttribute("r","235");
         viz_color.addAttribute("g","81");
         viz_color.addAttribute("b","72");
         viz_color.setText("");
-        //graph--><edges>
-        Element edges = graph.addElement("edges");
-        Element edge = edges.addElement("edge");
-        edge.addAttribute("id","0");
-        edge.addAttribute("source","1");
-        edge.addAttribute("target","0");
-        Element edge_attvalues = edge.addElement("attvalues");
-        edge_attvalues.setText("");
-        System.out.print(document.asXML());
+
+        return node;
+    }
+
+    private static Element generateEdge(List<NodeInfoVo> nodeInfoVos,Element edges){
+        if(CollectionUtils.isEmpty(nodeInfoVos) ||  edges == null){
+            return null;
+        }
+        List<Element> listEdges = new ArrayList<Element>();
+        for(NodeInfoVo nodeInfoVo:nodeInfoVos){
+            Element edge = edges.addElement("edge");
+            edge.addAttribute("id","0");
+            edge.addAttribute("source",nodeInfoVo.getNowRouteNode());
+            edge.addAttribute("target",nodeInfoVo.getNextRouteNode());
+            Element edge_attvalues = edge.addElement("attvalues");
+            edge_attvalues.setText("");
+        }
+        return edges;
+
     }
 }

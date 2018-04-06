@@ -36,23 +36,23 @@ public class SysServiceGuiController {
 
     @RequestMapping("/getsysname")
     @ResponseBody
-    public JsonResponse getSysName(){
+    public String getSysName(){
         long tid = System.nanoTime();
         try {
             List<String> sysname = sysServiceGuiService.getServiceName();
             sysname.add(0,"企业服务总线");
             Map<String,Object> resultMap = new HashMap<String, Object>();
             resultMap.put("sysname",sysname);
-            return new JsonResponse(resultMap);
+            return new JsonResponse(resultMap).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
-            return new JsonResponse("error");
+            return new JsonResponse("error").toJSON();
         }
     }
 
     @RequestMapping("/getsyscount")
     @ResponseBody
-    public JsonResponse getsyscount(){
+    public String  getsyscount(){
         long tid = System.nanoTime();
         try {
             List<String> sysname = sysServiceGuiService.getServiceName();
@@ -66,10 +66,10 @@ public class SysServiceGuiController {
             }
             Map<String,Object> resultMap = new HashMap<String, Object>();
             resultMap.put("count",count);
-            return new JsonResponse(resultMap);
+            return new JsonResponse(resultMap).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取服务调用关系系统名称异常",tid,e);
-            return new JsonResponse("error");
+            return new JsonResponse("error").toJSON();
         }
     }
 }
