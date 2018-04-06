@@ -14,9 +14,9 @@ public class CommonUtil {
 
     private static final Logger log = LoggerFactory.getLogger(CommonUtil.class);
 
-    private static final byte[] b = new byte[1000];
+    private static byte[] b = new byte[1000];
 
-    {
+    static{
         for(int i = 0;i<b.length ;i++){
             b[i] = (byte)(i%2 == 0?(-1)*new Random().nextInt(128):new Random().nextInt(128));
         }
@@ -38,7 +38,7 @@ public class CommonUtil {
 
     public static Map<String,List<NodeInfoVo>> dataConvert( List<NodeInfoVo> list){
 
-        if(CollectionUtils.isNotEmpty(list)){
+        if(CollectionUtils.isEmpty(list)){
             return null;
         }
         Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();

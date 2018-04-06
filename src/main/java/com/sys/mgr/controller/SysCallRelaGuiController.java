@@ -41,7 +41,7 @@ public class SysCallRelaGuiController {
 
     @RequestMapping("/getsysname")
     @ResponseBody
-    public JsonResponse getSysName(){
+    public String getSysName(){
         long tid = System.nanoTime();
         try {
             List<NodeInfoVo> nodeInfoVos = sysCallRelaGuiService.getSysName();
@@ -49,12 +49,10 @@ public class SysCallRelaGuiController {
             Map<String,List<NodeInfoVo>> map = CommonUtil.dataConvert(nodeInfoVos);
 
             String result = getXMl(map);
-            Map<String,Object> resultMap = new HashMap<String, Object>();
-            resultMap.put("sysname",result);
-            return new JsonResponse(resultMap);
+            return result;
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
-            return new JsonResponse("error");
+            return null;
         }
     }
 
@@ -113,25 +111,23 @@ public class SysCallRelaGuiController {
         attribute.setText("");
         //graph--><nodes>
         Element nodes = graph.addElement("nodes");
+        Element edges = graph.addElement("edges");
         if(map == null || map.isEmpty()){
             return document.asXML();
         }
         List<Element> elements = new ArrayList<Element>();
         for(Map.Entry<String,List<NodeInfoVo>> entry : map.entrySet()){
-            nodes.add(generateNode(entry.getKey()));
-            elements.addAll(generateEdge(entry.getValue()));
-        }
-        for(Element element : elements){
-            nodes.add(element);
+           generateNode(entry.getKey(),nodes);
+           generateEdge(entry.getValue(),edges);
         }
         return document.asXML();
     }
 
-    private Element generateNode(String nodeName){
+    private Element generateNode(String nodeName,Element element){
 
-        Element node = DocumentHelper.createElement("node");
+        Element node = element.addElement("node");
         node.addAttribute("id",nodeName);
-        node.addAttribute("label","Myriel");
+        node.addAttribute("label",nodeName);
         ////graph--><nodes>-->node-->....
         Element attvalues = node.addElement("attvalues");
         Element attvalue = attvalues.addElement("attvalue");
@@ -157,13 +153,12 @@ public class SysCallRelaGuiController {
         return node;
     }
 
-    private List<Element> generateEdge(List<NodeInfoVo> nodeInfoVos){
-        if(CollectionUtils.isEmpty(nodeInfoVos)){
+    private Element generateEdge(List<NodeInfoVo> nodeInfoVos,Element edges){
+        if(CollectionUtils.isEmpty(nodeInfoVos) ||  edges == null){
             return null;
         }
         List<Element> listEdges = new ArrayList<Element>();
         for(NodeInfoVo nodeInfoVo:nodeInfoVos){
-            Element edges = DocumentHelper.createElement("edges");
             Element edge = edges.addElement("edge");
             edge.addAttribute("id","0");
             edge.addAttribute("source",nodeInfoVo.getNowRouteNode());
@@ -171,7 +166,7 @@ public class SysCallRelaGuiController {
             Element edge_attvalues = edge.addElement("attvalues");
             edge_attvalues.setText("");
         }
-        return listEdges;
+        return edges;
 
     }
 
