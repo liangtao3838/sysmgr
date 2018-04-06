@@ -24,9 +24,36 @@ public class SysCallRelaGuiServiceImpl implements SysCallRelaGuiService{
     public List<NodeInfoVo> getSysName() {
 
         List<NodeInfoVo> list =sysCallRelaGuiDao.getSysName();
+        Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
+        for(NodeInfoVo nodeInfo : list){
+            if(map.containsKey(nodeInfo.getNextRouteNode())){
+                List<NodeInfoVo> nodeInfos = map.get(nodeInfo.getNextRouteNode());
+                boolean flag = false;
+                for(NodeInfoVo nodeInfo1 : nodeInfos){
+                    if(nodeInfo1.getNowRouteNode().equals(nodeInfo.getNextRouteNode()) && nodeInfo1.getNextRouteNode().equals(nodeInfo.getNowRouteNode())){
+                        flag = true;
+                        continue;
+                    }
+                }
+                if(flag){
+                    continue;
+                }
+                if(map.containsKey(nodeInfo.getNowRouteNode())){
+                    map.get(nodeInfo.getNowRouteNode()).add(nodeInfo);
+                }else{
+                    List<NodeInfoVo> nodeInfos1 = new ArrayList<NodeInfoVo>();
+                    nodeInfos1.add(nodeInfo);
+                    map.put(nodeInfo.getNowRouteNode(),list);
+                }
+            }else {
+
+            }
+
+            if(map.containsKey(nodeInfo.getNowRouteNode())){
+            }
+        }
         return list;
     }
-
 
     @Override
     public List<String> getSysNameXXX() {

@@ -2,7 +2,6 @@ package com.sys.mgr.controller;
 
 import com.sys.mgr.model.NodeInfoVo;
 import com.sys.mgr.service.SysCallRelaGuiService;
-import com.sys.mgr.utils.CommonUtil;
 import com.sys.mgr.utils.JsonResponse;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -44,13 +43,10 @@ public class SysCallRelaGuiController {
     public JsonResponse getSysName(){
         long tid = System.nanoTime();
         try {
-            List<NodeInfoVo> nodeInfoVos = sysCallRelaGuiService.getSysName();
-
-            Map<String,List<NodeInfoVo>> map = CommonUtil.dataConvert(nodeInfoVos);
-
-            String result = getXMl(map);
+            List<String> sysname = sysCallRelaGuiService.getSysNameXXX();
+            sysname.add(0,"企业服务总线");
             Map<String,Object> resultMap = new HashMap<String, Object>();
-            resultMap.put("sysname",result);
+            resultMap.put("sysname",sysname);
             return new JsonResponse(resultMap);
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
@@ -82,8 +78,8 @@ public class SysCallRelaGuiController {
         }
     }
 
-    private String getXMl(Map<String,List<NodeInfoVo>> map){
-        //生成xml
+    private String getXMl(List<List<String>> lists){
+
         Document document = DocumentHelper.createDocument();
         Element root = document.addElement("gexf","http://www.gexf.net/1.2draft");
         root.addAttribute("version", "2.0");
@@ -113,24 +109,9 @@ public class SysCallRelaGuiController {
         attribute.setText("");
         //graph--><nodes>
         Element nodes = graph.addElement("nodes");
-        if(map == null || map.isEmpty()){
-            return document.asXML();
-        }
-        List<Element> elements = new ArrayList<Element>();
-        for(Map.Entry<String,List<NodeInfoVo>> entry : map.entrySet()){
-            nodes.add(generateNode(entry.getKey()));
-            elements.addAll(generateEdge(entry.getValue()));
-        }
-        for(Element element : elements){
-            nodes.add(element);
-        }
-        return document.asXML();
-    }
 
-    private Element generateNode(String nodeName){
-
-        Element node = DocumentHelper.createElement("node");
-        node.addAttribute("id",nodeName);
+        Element node = nodes.addElement("node");
+        node.addAttribute("id","0");
         node.addAttribute("label","Myriel");
         ////graph--><nodes>-->node-->....
         Element attvalues = node.addElement("attvalues");
@@ -141,38 +122,29 @@ public class SysCallRelaGuiController {
         Element viz_size = attvalues.addElement("viz:size","http://www.gexf.net/1.2draft/viz");
         viz_size.addAttribute("value","28.685715");
         viz_size.setText("");
-
         Element viz_position = attvalues.addElement("viz:position","http://www.gexf.net/1.2draft/viz");
-        viz_position.addAttribute("x",CommonUtil.getRandomValue());
-        viz_position.addAttribute("y",CommonUtil.getRandomValue());
-        viz_position.addAttribute("z",CommonUtil.getRandomValue());
+        viz_position.addAttribute("x","-266.82776");
+        viz_position.addAttribute("y","299.6904");
+        viz_position.addAttribute("z","0.0");
         viz_position.setText("");
-
         Element viz_color = attvalues.addElement("viz:color","http://www.gexf.net/1.2draft/viz");
         viz_color.addAttribute("r","235");
         viz_color.addAttribute("g","81");
         viz_color.addAttribute("b","72");
         viz_color.setText("");
+        //graph--><edges>
+        Element edges = graph.addElement("edges");
 
-        return node;
-    }
 
-    private List<Element> generateEdge(List<NodeInfoVo> nodeInfoVos){
-        if(CollectionUtils.isEmpty(nodeInfoVos)){
-            return null;
-        }
-        List<Element> listEdges = new ArrayList<Element>();
-        for(NodeInfoVo nodeInfoVo:nodeInfoVos){
-            Element edges = DocumentHelper.createElement("edges");
-            Element edge = edges.addElement("edge");
-            edge.addAttribute("id","0");
-            edge.addAttribute("source",nodeInfoVo.getNowRouteNode());
-            edge.addAttribute("target",nodeInfoVo.getNextRouteNode());
-            Element edge_attvalues = edge.addElement("attvalues");
-            edge_attvalues.setText("");
-        }
-        return listEdges;
+        Element edge = edges.addElement("edge");
+        edge.addAttribute("id","0");
+        edge.addAttribute("source","1");
+        edge.addAttribute("target","0");
+        Element edge_attvalues = edge.addElement("attvalues");
+        edge_attvalues.setText("");
 
+
+        return document.asXML();
     }
 
 }
