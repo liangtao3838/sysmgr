@@ -16,7 +16,7 @@
 <div id="main">
     <div id="left" style="float:left ;  width:40%;  height:100%;">
         <span>监控周期</span>
-        <select style="width:50px;">
+        <select id="monitortime" style="width:70px;">
             <option value ="hour">小时</option>
             <option value ="minutes">五分钟</option>
             <option value ="day">天</option>
@@ -39,7 +39,7 @@
                 var content = "";
                 $.each(nodes, function(i, item){
                     var arr = item.split(",");
-                    content += '<span>'+arr[0]+'系统</span></br>';
+                    content += '<span><a href="/sysservicegui/index.do?nodecode='+arr[0]+'">'+arr[0]+'系统</a></span></br>';
                     content += '<input type="text" readonly value="'+arr[1]+'">';
                     content += '<input type="text" readonly value="'+arr[2]+'">';
                     content += '</br>'

@@ -2,12 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sys.mgr.dao.SysServiceGuiDao">
 
-    <select id="getServiceName" resultType="java.lang.String">
-        select ni.node_name
+    <select id="getServiceName" resultType="com.sys.mgr.model.NodeInfoVo">
+        select ss.service_name as nextRouteNode,ss.node_code as nowRouteNode
         from sys_service ss
-        left join node_info ni
-        on ss.node_code=ni.node_code
-        where ss.yn=0 and ni.node_name is not null
+        where  ss.node_code=#{nodecode}
     </select>
 
 

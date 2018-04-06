@@ -1,21 +1,22 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../../common.jsp" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ECharts">
-    <script src="<%=basePath%>/echarts/build/dist/echarts.js"></script>
-    <script src="<%=basePath%>/js/common/jquery.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript" src="/echarts/js/echarts.min.js"></script>
+    <script type="text/javascript" src="/echarts/js/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="/echarts/js/ecStat.min.js"></script>
+    <script type="text/javascript" src="/echarts/js/dataTool.min.js"></script>
+    <script type="text/javascript" src="/echarts/js/simplex.js"></script>
+    <script type="text/javascript" src="/echarts/js/jquery-3.3.1.min.js"></script>
 </head>
-<body>
-<div id="main" style="width:1000px;  height:500px;">
-    <div id="left" style="float:left ;  width:50%;  height:100%;">
+<body style="height: 100%; margin: 0">
+<div id="main">
+    <div id="left" style="float:left ;  width:40%;  height:100%;">
         <span>监控周期</span>
-        <select style="width:50px;">
+        <select id="monitortime" style="width:70px;">
             <option value ="hour">小时</option>
             <option value ="minutes">五分钟</option>
             <option value ="day">天</option>
@@ -23,16 +24,18 @@
         <div id="sysrole" style="margin-top: 100px;">
         </div>
     </div>
-    <div id="right" style="float:left ;  width:50%; height:100%;"></div>
+    <div id="right" style="float:left ; background-color: #0f0f0f; width:60%; height:100%;"></div>
 </div>
-
 <script type="text/javascript">
-
+    var par = window.location.search;
+    var arr=par.split("=");
+    var nodecode=arr[arr.length-1];
     $(function () {
         $.ajax({
             url: "/sysservicegui/getsyscount.do",
             dataType: "json",
             type: "post",
+            data:{nodecode:nodecode},
             async: false,
             success : function(data){
                 var nodes=data.result.count;
@@ -49,135 +52,71 @@
         });
     });
 
-    var getNodes = function(){
-        var result = [];
-        var temp = {};
-        $.ajax({
-            url: "/sysservicegui/getsysname.do",
-            dataType: "json",
-            type: "post",
-            async: false,
-            success : function(data){
-                var nodes=data.result.sysname;
-                $.each(nodes, function(i, item){
-                    if(i==0){
-                        temp = {category:0, name:item, value:4, label:item};
-                    }else{
-                        temp = {category:1, name:item, value:2, label:item};
-                    }
-                    result.push(temp);
-                })
-            },
-        });
-        return result;
-    };
-
-    var getLinks = function(){
-        var result = [];
-        var temp = {};
-        $.ajax({
-            url: "/sysservicegui/getsysname.do",
-            type: "post",
-            contentType: "json",
-            async: false,
-            success : function(data){
-                var nodes=data.result.sysname;
-                $.each(nodes, function(i, item){
-                    if(i>0){
-                        temp =  {source :item, target :data.result.sysname[0] , weight : 4, name: '依赖'};
-                        result.push(temp);
-                    }
-                })
-            },
-        });
-        return result;
-    };
-
-    // 路径配置
-    require.config({
-        paths: {
-            echarts: '/echarts/build/dist'
-        }
-    });
-
-    // 使用
-    require(
-            [
-                'echarts',
-                'echarts/chart/force',
-                'echarts/chart/chord'// 使用柱状图就加载bar模块，按需加载
-            ],
-            DrawEChart
-    );
-
-    function DrawEChart(ec) {
-        //--- 折柱 ---
-        myChart = ec.init(document.getElementById('right'));
-        //图表显示提示信息
-        myChart.showLoading({
-            text: "站点关系图正在努力加载..."
-        });
+    var dom = document.getElementById("right");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    app.title = '力引导布局';
+    myChart.showLoading();
+    $.get('/sysservicegui/getsysname.do?nodecode='+nodecode+'', function (xml) {
         myChart.hideLoading();
-        myChart.setOption({
-            title : {
-                text: '服务关系：企业服务总线',
-                x:'center',
-                y:'left'
+        var graph = echarts.dataTool.gexf.parse(xml);
+        var categories = [];
+        for (var i = 0; i < graph.nodes.length; i++) {
+            categories[i] = {
+                name: graph.nodes[i].name
+            };
+        }
+        graph.nodes.forEach(function (node) {
+            node.itemStyle = null;
+            node.symbolSize = 50;
+            node.value = node.symbolSize;
+            node.category = node.attributes.modularity_class;
+            node.x = node.y = null;
+            node.draggable = true;
+            node.onclick = function(){
+            }
+        });
+        option = {
+            title: {
+                text: 'Les Miserables',
+                subtext: 'Default layout',
+                top: 'bottom',
+                left: 'right'
             },
-            tooltip : {
-                trigger: 'item',
-                formatter: '{a} : {b}'
-            },
+            tooltip: {},
+            legend: [{
+                data: categories.map(function (a) {
+                    return a.name;
+                })
+            }],
+            animation: false,
             series : [
                 {
-                    type:'force',
-                    name : "服务关系",
-                    ribbonType: false,
-                    itemStyle: {
+                    name: 'Les Miserables',
+                    type: 'graph',
+                    layout: 'force',
+                    data: graph.nodes,
+                    links: graph.links,
+                    categories: categories,
+                    roam: true,
+                    label: {
                         normal: {
-                            label: {
-                                show: true,
-                                textStyle: {
-                                    color: '#333'
-                                }
-                            },
-                            nodeStyle : {
-                                brushType : 'both',
-                                borderColor : 'rgba(255,215,0,0.4)',
-                                borderWidth : 1
-                            },
-                            linkStyle: {
-                                type: 'curve'
-                            }
-                        },
-                        emphasis: {
-                            label: {
-                                show: false
-                            },
-                            nodeStyle : {
-                            },
-                            linkStyle : {}
+                            position: 'right'
                         }
                     },
-                    useWorker: false,
-                    minRadius : 15,
-                    maxRadius : 25,
-                    gravity: 1.1,
-                    scaling: 1.1,
-                    roam : 'move',
-                    nodes : getNodes(),
-                    links : getLinks()
+                    force: {
+                        repulsion: 1000
+                    }
                 }
             ]
-        });
-    }
+        };
 
+        myChart.setOption(option);
+    }, 'xml');;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
 </script>
 </body>
 </html>
-
-
-
-
-
-

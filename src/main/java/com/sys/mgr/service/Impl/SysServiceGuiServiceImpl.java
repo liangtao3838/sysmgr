@@ -1,6 +1,7 @@
 package com.sys.mgr.service.Impl;
 
 import com.sys.mgr.dao.SysServiceGuiDao;
+import com.sys.mgr.model.NodeInfoVo;
 import com.sys.mgr.service.SysCallRelaGuiService;
 import com.sys.mgr.service.SysServiceGuiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class SysServiceGuiServiceImpl implements SysServiceGuiService {
     SysServiceGuiDao sysServiceGuiDao;
 
     @Override
-    public List<String> getServiceName() {
-        return sysServiceGuiDao.getServiceName();
+    public List<NodeInfoVo> getServiceName(String nodecode) {
+        return sysServiceGuiDao.getServiceName(nodecode);
     }
 
     public Integer getSuccCount(String serviceName){

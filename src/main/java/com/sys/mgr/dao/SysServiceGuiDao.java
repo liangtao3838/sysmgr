@@ -1,5 +1,6 @@
 package com.sys.mgr.dao;
 
+import com.sys.mgr.model.NodeInfoVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Repository
 public interface SysServiceGuiDao {
 
-    List<String> getServiceName();
+    List<NodeInfoVo> getServiceName(@Param("nodecode") String nodecode);
 
     Integer getSuccCount(@Param("serviceName") String serviceName);
 

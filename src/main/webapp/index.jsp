@@ -74,7 +74,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/syscallrelagui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统监控功能图</span></a></li>
-                        <li><a href="/sysservicegui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务监控功能图</span></a></li>
+                        <%--<li><a href="/sysservicegui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>服务监控功能图</span></a></li>--%>
                         <li><a href="/tradedetail/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>交易明细</span></a></li>
                     </ul>
                 </li>

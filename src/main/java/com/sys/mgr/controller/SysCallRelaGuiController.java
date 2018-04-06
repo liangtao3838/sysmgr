@@ -64,7 +64,8 @@ public class SysCallRelaGuiController {
         long tid = System.nanoTime();
         try {
             List<NodeInfoVo> nodeInfoVos = sysCallRelaGuiService.getSysName();
-            return new JsonResponse(nodeInfoVos).toJSON();
+            Map<String,List<NodeInfoVo>> map = CommonUtil.dataConvert(nodeInfoVos);
+            return new JsonResponse(map.keySet()).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
             return JsonResponse.errorResponse(-1,"查询异常").toJSON();
@@ -76,10 +77,11 @@ public class SysCallRelaGuiController {
     public String getsyscount(){
         long tid = System.nanoTime();
         try {
-            List<String> sysname = sysCallRelaGuiService.getSysNameXXX();
+            List<NodeInfoVo> nodeInfoVos = sysCallRelaGuiService.getSysName();
+            Map<String,List<NodeInfoVo>> map = CommonUtil.dataConvert(nodeInfoVos);
             List<String> count = new ArrayList<String>();
-            if(!CollectionUtils.isEmpty(sysname)){
-                for(String str:sysname){
+            if(!CollectionUtils.isEmpty(nodeInfoVos)){
+                for(String str:map.keySet()){
                     Integer succNum = sysCallRelaGuiService.getSysSuccCount(str);
                     Integer failNum = sysCallRelaGuiService.getSysFailCount(str);
                     count.add(str+","+succNum+","+failNum);

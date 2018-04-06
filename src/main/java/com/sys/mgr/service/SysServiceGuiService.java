@@ -1,5 +1,7 @@
 package com.sys.mgr.service;
 
+import com.sys.mgr.model.NodeInfoVo;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  */
 public interface SysServiceGuiService {
 
-    List<String> getServiceName();
+    List<NodeInfoVo> getServiceName(String nodecode);
 
     Integer getSuccCount(String serviceName);
 
