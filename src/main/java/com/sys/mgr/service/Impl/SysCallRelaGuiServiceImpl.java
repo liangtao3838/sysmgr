@@ -38,21 +38,22 @@ public class SysCallRelaGuiServiceImpl implements SysCallRelaGuiService{
                 if(flag){
                     continue;
                 }
-                if(map.containsKey(nodeInfo.getNowRouteNode())){
-                    map.get(nodeInfo.getNowRouteNode()).add(nodeInfo);
-                }else{
-                    List<NodeInfoVo> nodeInfos1 = new ArrayList<NodeInfoVo>();
-                    nodeInfos1.add(nodeInfo);
-                    map.put(nodeInfo.getNowRouteNode(),list);
-                }
+                getMap(map,nodeInfo,list);
             }else {
-
-            }
-
-            if(map.containsKey(nodeInfo.getNowRouteNode())){
+                getMap(map,nodeInfo,list);
             }
         }
         return list;
+    }
+
+    private void getMap(Map<String,List<NodeInfoVo>> map,NodeInfoVo nodeInfo,List<NodeInfoVo> list){
+        if(map.containsKey(nodeInfo.getNowRouteNode())){
+            map.get(nodeInfo.getNowRouteNode()).add(nodeInfo);
+        }else{
+            List<NodeInfoVo> nodeInfos1 = new ArrayList<NodeInfoVo>();
+            nodeInfos1.add(nodeInfo);
+            map.put(nodeInfo.getNowRouteNode(),list);
+        }
     }
 
     @Override
