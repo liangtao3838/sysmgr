@@ -124,12 +124,11 @@
         $.ajax({
             type: "POST",
             url: "/nodeinfo/add.do",
-            data: JSON.stringify(data),	//传入已封装的参数
-            contentType:"application/json;charset=utf-8",
-            dataType: "json",
+            data: data,	//传入已封装的参数
             success:function(data){
                 resetForm();
                 $("#nodeInfoConfigModal").modal('hide');
+                var data=JSON.parse(data);
                 if(data.code==1){
                     $.dialog.success("添加成功");
                     InitNodeInfoQueryTableParam();
@@ -174,10 +173,9 @@
         $.ajax({
             type: "POST",
             url: "/nodeinfo/update.do",
-            data: JSON.stringify(data),	//传入已封装的参数
-            contentType:"application/json;charset=utf-8",
-            dataType: "json",
+            data: data,	//传入已封装的参数
             success:function(data){
+                var data=JSON.parse(data);
                 if(data.code==1){
                     $.dialog.success("修改成功");
                     $("#updatenodeInfoConfigModal").modal('hide');

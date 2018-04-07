@@ -1,5 +1,7 @@
 package com.sys.mgr.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sys.mgr.model.NodeInfo;
 import com.sys.mgr.service.Impl.NodeInfoServiceImpl;
 import com.sys.mgr.utils.CommonUtil;
@@ -57,7 +59,7 @@ public class NodeInfoController {
 
     @RequestMapping("add")
     @ResponseBody
-    public String  add(@RequestBody NodeInfo info){
+    public String  add(NodeInfo info){
         long tid = System.nanoTime();
         try{
             boolean result = nodeInfoServiceImpl.add(info);
@@ -70,7 +72,7 @@ public class NodeInfoController {
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(@RequestBody NodeInfo info){
+    public String update(NodeInfo info){
         long tid = System.nanoTime();
         try{
             boolean result = nodeInfoServiceImpl.update(info);

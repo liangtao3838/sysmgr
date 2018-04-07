@@ -1,5 +1,6 @@
 package com.sys.mgr.model;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
@@ -123,5 +124,9 @@ public class NodeInfo implements Serializable{
                 ", updatePin='" + updatePin + '\'' +
                 ", ts='" + ts + '\'' +
                 '}';
+    }
+
+    public String toJSON(){
+        return JSONObject.toJSONString(this);
     }
 }

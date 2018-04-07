@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
+    <title>系统监控</title>
     <script type="text/javascript" src="/echarts/js/echarts.min.js"></script>
     <script type="text/javascript" src="/echarts/js/echarts-gl.min.js"></script>
     <script type="text/javascript" src="/echarts/js/ecStat.min.js"></script>
@@ -16,7 +16,7 @@
 <div id="main">
     <div id="left" style="float:left ;  width:40%;  height:100%;">
         <span>监控周期</span>
-        <select id="monitortime" style="width:70px;">
+        <select id="monitortime" onload="monitor()" style="width:70px;">
             <option value ="hour">小时</option>
             <option value ="minutes">五分钟</option>
             <option value ="day">天</option>
@@ -29,27 +29,31 @@
 <script type="text/javascript">
 
     $(function () {
+        monitor();
+    });
+
+    function monitor() {
         var monitortime = $("#monitortime").val();
         $.ajax({
             url: "/syscallrelagui/getsyscount.do",
             dataType: "json",
             type: "post",
             async: false,
-            data:{monitortime:monitortime},
-            success : function(data){
-                var nodes=data.result.count;
+            data: {monitortime: monitortime},
+            success: function (data) {
+                var nodes = data.result.count;
                 var content = "";
-                $.each(nodes, function(i, item){
+                $.each(nodes, function (i, item) {
                     var arr = item.split(",");
-                    content += '<span><a href="/sysservicegui/index.do?nodecode='+arr[0]+'">'+arr[0]+'系统</a></span></br>';
-                    content += '<input type="text" readonly value="'+arr[1]+'">';
-                    content += '<input type="text" readonly value="'+arr[2]+'">';
+                    content += '<span><a href="/sysservicegui/index.do?nodecode=' + arr[0] + '">' + arr[0] + '系统</a></span></br>';
+                    content += '<input type="text" readonly value="' + arr[1] + '">';
+                    content += '<input type="text" readonly value="' + arr[2] + '">';
                     content += '</br>'
                 })
                 $("#sysrole").html(content);
             },
         });
-    });
+    }
 
     var dom = document.getElementById("right");
     var myChart = echarts.init(dom);
@@ -78,7 +82,7 @@
         option = {
             title: {
                 text: '',
-                subtext: 'Default layout',
+                subtext: '',
                 top: 'bottom',
                 left: 'right'
             },

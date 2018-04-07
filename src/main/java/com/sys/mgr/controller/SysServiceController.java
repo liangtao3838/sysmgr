@@ -58,7 +58,7 @@ public class SysServiceController {
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(@RequestBody SysService info){
+    public String add(SysService info){
         long tid = System.nanoTime();
         try{
             boolean result = sysServiceService.add(info);
@@ -72,7 +72,7 @@ public class SysServiceController {
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(@RequestBody SysService info){
+    public String update(SysService info){
         long tid = System.nanoTime();
         try{
             boolean result = sysServiceService.update(info);

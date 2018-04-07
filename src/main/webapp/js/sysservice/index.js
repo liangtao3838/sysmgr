@@ -148,12 +148,11 @@ $("#submitBtn_sysservice").click(function(){
     $.ajax({
         type: "POST",
         url: "/sysservice/add.do",
-        data: JSON.stringify(data),	//传入已封装的参数
-        contentType:"application/json;charset=utf-8",
-        dataType: "json",
+        data: data,	//传入已封装的参数
         success:function(data){
             resetForm();
             $("#sysserviceConfigModal").modal('hide');
+            var data=JSON.parse(data);
             if(data.code==1){
                 $.dialog.success("添加成功");
                 InitSysServiceQueryTableParam();
@@ -202,10 +201,9 @@ $("#submitBtn_updatesysservice").click(function(){
     $.ajax({
         type: "POST",
         url: "/sysservice/update.do",
-        data: JSON.stringify(data),	//传入已封装的参数
-        contentType:"application/json;charset=utf-8",
-        dataType: "json",
+        data: data,	//传入已封装的参数
         success:function(data){
+            var data=JSON.parse(data);
             if(data.code==1){
                 $.dialog.success("修改成功");
                 $("#updatesysserviceConfigModal").modal('hide');

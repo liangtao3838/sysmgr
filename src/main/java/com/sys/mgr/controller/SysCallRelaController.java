@@ -57,7 +57,7 @@ public class SysCallRelaController {
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(@RequestBody SysCallRela info){
+    public String add(SysCallRela info){
         long tid = System.nanoTime();
         try{
             boolean result = sysCallRelaService.add(info);
@@ -70,7 +70,7 @@ public class SysCallRelaController {
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(@RequestBody SysCallRela info){
+    public String update(SysCallRela info){
         long tid = System.nanoTime();
         try{
             boolean result = sysCallRelaService.update(info);
