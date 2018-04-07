@@ -16,7 +16,7 @@
 <div id="main">
     <div id="left" style="float:left ;  width:40%;  height:100%;">
         <span>监控周期</span>
-        <select id="monitortime" onclick="monitor()" style="width:70px;">
+        <select id="monitortime" onblur="monitor()" style="width:70px;">
             <option value ="hour">小时</option>
             <option value ="minutes">五分钟</option>
             <option value ="day">天</option>
