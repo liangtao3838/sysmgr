@@ -4,11 +4,11 @@ import com.sys.mgr.model.SysService;
 import com.sys.mgr.model.TradeDetail;
 import com.sys.mgr.service.TradeDetailService;
 import com.sys.mgr.utils.JsonResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,11 +67,11 @@ public class TradeDetailController {
             @RequestParam(value = "id") Long id,
             @RequestParam(value = "type") String type){
         long tid = System.nanoTime();
+        if(id==null||StringUtils.isEmpty(type)){
+            return JsonResponse.errorResponse(-1,"参数非法").toJSON();
+        }
         try{
             String data =  tradeDetailService.getXMl(id,type);
-            if(StringUtils.isEmpty(data)){
-                data = "woshinidaye";
-            }
             return new JsonResponse(data).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取交易相应明细异常,id:{},type",tid,id,type,e);

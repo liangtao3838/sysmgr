@@ -54,7 +54,7 @@ public class SysCallRelaGuiController {
             return result;
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
-            return null;
+            return JsonResponse.errorResponse(-1,"查询异常").toJSON();
         }
     }
 
@@ -105,7 +105,7 @@ public class SysCallRelaGuiController {
             return new JsonResponse(resultMap).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
-            return new JsonResponse("error").toJSON();
+            return JsonResponse.errorResponse(-1,"查询异常").toJSON();
         }
     }
 

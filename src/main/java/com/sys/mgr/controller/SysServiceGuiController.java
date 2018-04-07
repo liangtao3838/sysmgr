@@ -49,7 +49,7 @@ public class SysServiceGuiController {
             return xml;
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
-            return new JsonResponse("error").toJSON();
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 
@@ -84,7 +84,7 @@ public class SysServiceGuiController {
             return new JsonResponse(resultMap).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取服务调用关系系统名称异常",tid,e);
-            return new JsonResponse("error").toJSON();
+            return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
 }

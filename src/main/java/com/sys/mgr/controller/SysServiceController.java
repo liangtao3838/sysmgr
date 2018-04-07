@@ -6,6 +6,7 @@ import com.sys.mgr.service.SysCallRelaService;
 import com.sys.mgr.service.SysServiceService;
 import com.sys.mgr.utils.CommonUtil;
 import com.sys.mgr.utils.JsonResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class SysServiceController {
             boolean result = sysServiceService.add(info);
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加服务调用关系异常",tid,e);
+            log.error("tid:{} ,SysService:{}添加服务调用关系异常",tid,info.toString(),e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -78,7 +79,7 @@ public class SysServiceController {
             boolean result = sysServiceService.update(info);
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加服务关系信息异常",tid,e);
+            log.error("tid:{},SysService:{} 添加服务关系信息异常",tid,info.toString(),e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -89,12 +90,15 @@ public class SysServiceController {
             @RequestParam(value = "idlist") String idlist
     ){
         long tid = System.nanoTime();
+        if(StringUtils.isEmpty(idlist)){
+            return JsonResponse.errorResponse(-1,"请选择一条记录").toJSON();
+        }
         List<Long> ids= CommonUtil.splitId(tid,idlist);
         try{
             boolean result = sysServiceService.delete(ids,"test");
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加服务关系信息异常",tid,e);
+            log.error("tid:{} ,id:{}删除服务关系信息异常",tid,idlist,e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -103,11 +107,14 @@ public class SysServiceController {
     @ResponseBody
     public String query(String id){
         long tid = System.nanoTime();
+        if(StringUtils.isEmpty(id)){
+            return JsonResponse.errorResponse(-1,"请选择一条记录").toJSON();
+        }
         try{
             SysService sysService = sysServiceService.query(tid,Long.parseLong(id));
             return new JsonResponse(sysService).toJSON();
         }catch (Exception e){
-            log.error("tid:{} 查询服务关系信息异常,id:{}",tid,id,e);
+            log.error("tid:{} ,查询服务关系信息异常,id:{}",tid,id,e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }

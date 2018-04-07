@@ -6,6 +6,7 @@ import com.sys.mgr.model.NodeInfo;
 import com.sys.mgr.service.Impl.NodeInfoServiceImpl;
 import com.sys.mgr.utils.CommonUtil;
 import com.sys.mgr.utils.JsonResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class NodeInfoController {
             boolean result = nodeInfoServiceImpl.add(info);
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加节点信息异常",tid,e);
+            log.error("tid:{} ,nodeinof:{}添加节点信息异常",tid,info.toString(),e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -78,7 +79,7 @@ public class NodeInfoController {
             boolean result = nodeInfoServiceImpl.update(info);
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加节点信息异常",tid,e);
+            log.error("tid:{} nodeInfo:{}修改节点信息异常",tid,info.toString(),e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -88,13 +89,16 @@ public class NodeInfoController {
     public String del(
             @RequestParam(value = "idlist") String idlist
     ){
+        if(StringUtils.isEmpty(idlist)){
+            return JsonResponse.errorResponse(-1,"请选择一条记录").toJSON();
+        }
         long tid = System.nanoTime();
         List<Long> ids= CommonUtil.splitId(tid,idlist);
         try{
             boolean result = nodeInfoServiceImpl.delete(ids,"test");
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加节点信息异常",tid,e);
+            log.error("tid:{} id:{}删除节点信息异常",tid,idlist,e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -104,6 +108,9 @@ public class NodeInfoController {
     public String query(String id){
         long tid = System.nanoTime();
         try{
+            if(StringUtils.isEmpty(id)){
+                return JsonResponse.errorResponse(-1,"请选择一条记录").toJSON();
+            }
             NodeInfo nodeInfo = nodeInfoServiceImpl.query(tid,Long.parseLong(id));
             return new JsonResponse(nodeInfo).toJSON();
         }catch (Exception e){

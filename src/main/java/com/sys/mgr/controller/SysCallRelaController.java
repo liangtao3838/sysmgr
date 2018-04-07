@@ -4,6 +4,7 @@ import com.sys.mgr.model.SysCallRela;
 import com.sys.mgr.service.SysCallRelaService;
 import com.sys.mgr.utils.CommonUtil;
 import com.sys.mgr.utils.JsonResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class SysCallRelaController {
             boolean result = sysCallRelaService.add(info);
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加系统调用关系异常",tid,e);
+            log.error("tid:{},syscallrela:{} 添加系统调用关系异常",tid,info.toString(),e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -76,7 +77,7 @@ public class SysCallRelaController {
             boolean result = sysCallRelaService.update(info);
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加调用关系信息异常",tid,e);
+            log.error("tid:{} syscallrela:{} 修改调用关系信息异常",tid,info.toString(),e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -87,12 +88,15 @@ public class SysCallRelaController {
             @RequestParam(value = "idlist") String idlist
     ){
         long tid = System.nanoTime();
+        if(StringUtils.isEmpty(idlist)){
+            return JsonResponse.errorResponse(-1,"请选择一条记录").toJSON();
+        }
         List<Long> ids= CommonUtil.splitId(tid,idlist);
         try{
             boolean result = sysCallRelaService.delete(ids,"test");
             return new JsonResponse("ok").toJSON();
         }catch (Exception e){
-            log.error("tid:{} 添加调用关系信息异常",tid,e);
+            log.error("tid:{},id:{} 删除调用关系信息异常",tid,idlist,e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
     }
@@ -101,6 +105,9 @@ public class SysCallRelaController {
     @ResponseBody
     public String query(String id){
         long tid = System.nanoTime();
+        if(StringUtils.isEmpty(id)){
+            return JsonResponse.errorResponse(-1,"请选择一条记录").toJSON();
+        }
         try{
             SysCallRela sysCallRela = sysCallRelaService.query(tid,Long.parseLong(id));
             return new JsonResponse(sysCallRela).toJSON();
