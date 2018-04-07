@@ -69,8 +69,7 @@
         graph.nodes.forEach(function (node) {
             node.itemStyle = null;
             node.symbolSize = 50;
-            node.value = node.symbolSize;
-            node.category = node.attributes.modularity_class;
+            node.value = "";
             node.x = node.y = null;
             node.draggable = true;
             node.onclick = function(){
@@ -78,7 +77,7 @@
         });
         option = {
             title: {
-                text: 'Les Miserables',
+                text: '',
                 subtext: 'Default layout',
                 top: 'bottom',
                 left: 'right'
@@ -92,7 +91,7 @@
             animation: false,
             series : [
                 {
-                    name: 'Les Miserables',
+                    name: '',
                     type: 'graph',
                     layout: 'force',
                     data: graph.nodes,

@@ -7,6 +7,7 @@ import org.dom4j.Element;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,9 +28,9 @@ public class DocumentUtil {
 
         //meta 标签
         Element metas = root.addElement("meta");
-        metas.addAttribute("lastmodifieddate","2014-01-30");
+        metas.addAttribute("lastmodifieddate",DateUtil.getStringDate(new Date()));
         Element creator = metas.addElement("creator");
-        creator.setText("Gephi 0.8.1");
+        creator.setText("拓扑图");
         Element description = metas.addElement("description");
         description.setText("");
         //graph
@@ -81,9 +82,9 @@ public class DocumentUtil {
         viz_position.setText("");
 
         Element viz_color = attvalues.addElement("viz:color","http://www.gexf.net/1.2draft/viz");
-        viz_color.addAttribute("r","235");
-        viz_color.addAttribute("g","81");
-        viz_color.addAttribute("b","72");
+        viz_color.addAttribute("r","0");
+        viz_color.addAttribute("g","139");
+        viz_color.addAttribute("b","0");
         viz_color.setText("");
 
         return node;
@@ -99,6 +100,7 @@ public class DocumentUtil {
             edge.addAttribute("id","0");
             edge.addAttribute("source",nodeInfoVo.getNowRouteNode());
             edge.addAttribute("target",nodeInfoVo.getNextRouteNode());
+            edge.addAttribute("value","8");
             Element edge_attvalues = edge.addElement("attvalues");
             edge_attvalues.setText("");
         }
