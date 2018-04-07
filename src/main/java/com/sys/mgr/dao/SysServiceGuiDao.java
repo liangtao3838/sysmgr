@@ -14,7 +14,11 @@ public interface SysServiceGuiDao {
 
     List<NodeInfoVo> getServiceName(@Param("nodecode") String nodecode);
 
-    Integer getSuccCount(@Param("serviceName") String serviceName);
+    Integer getSuccCount(@Param("serviceName") String serviceName,
+                         @Param("startTime") String startTime,
+                         @Param("endTime")String endTime);
 
-    Integer getFailCount(@Param("serviceName") String serviceName);
+    Integer getFailCount(@Param("serviceName") String serviceName,
+                         @Param("startTime") String startTime,
+                         @Param("endTime")String endTime);
 }

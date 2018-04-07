@@ -3,6 +3,7 @@ package com.sys.mgr.controller;
 import com.sys.mgr.model.NodeInfoVo;
 import com.sys.mgr.service.SysCallRelaGuiService;
 import com.sys.mgr.utils.CommonUtil;
+import com.sys.mgr.utils.DateUtil;
 import com.sys.mgr.utils.DocumentUtil;
 import com.sys.mgr.utils.JsonResponse;
 import org.apache.tools.ant.taskdefs.optional.ejb.JonasDeploymentTool;
@@ -15,13 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by liangtao on 2018/3/20.
@@ -74,16 +74,29 @@ public class SysCallRelaGuiController {
 
     @RequestMapping("/getsyscount")
     @ResponseBody
-    public String getsyscount(){
+    public String getsyscount(
+            @RequestParam(value = "monitortime") String monitortime
+    ){
         long tid = System.nanoTime();
+        String startTime = null;
+        String endTime = DateUtil.getStringDate(new Date());;
+        if(monitortime.equals("hour")){
+            startTime = DateUtil.getStringDate(DateUtil.addHour(new Date(),-1));
+        }else if(monitortime.equals("minutes")){
+            startTime = DateUtil.getTimeByMinute(-5);
+        }else if(monitortime.equals("day")){
+            startTime = DateUtil.getStrDataDay(new Date(),-1);
+        }else {
+            return JsonResponse.errorResponse(-1,"监控周期参数异常").toJSON();
+        }
         try {
             List<NodeInfoVo> nodeInfoVos = sysCallRelaGuiService.getSysName();
             Map<String,List<NodeInfoVo>> map = CommonUtil.dataConvert(nodeInfoVos);
             List<String> count = new ArrayList<String>();
             if(!CollectionUtils.isEmpty(nodeInfoVos)){
                 for(String str:map.keySet()){
-                    Integer succNum = sysCallRelaGuiService.getSysSuccCount(str);
-                    Integer failNum = sysCallRelaGuiService.getSysFailCount(str);
+                    Integer succNum = sysCallRelaGuiService.getSysSuccCount(str,startTime,endTime);
+                    Integer failNum = sysCallRelaGuiService.getSysFailCount(str,startTime,endTime);
                     count.add(str+","+succNum+","+failNum);
                }
             }

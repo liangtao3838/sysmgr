@@ -12,12 +12,24 @@
     <select id="getSuccCount" resultType="java.lang.Integer">
         select count(*) from trade_detail
         where zt = 0 and jkmc=#{serviceName}
+        <if test="startTime != null and startTime !=''">
+            and ts &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and ts &lt;= #{endTime}
+        </if>
     </select>
 
 
     <select id="getFailCount" resultType="java.lang.Integer">
         select count(*) from trade_detail
         where zt = 1 and jkmc=#{serviceName}
+        <if test="startTime != null and startTime !=''">
+            and ts &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and ts &lt;= #{endTime}
+        </if>
     </select>
 
 

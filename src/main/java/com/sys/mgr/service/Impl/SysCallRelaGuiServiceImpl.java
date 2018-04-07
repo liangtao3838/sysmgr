@@ -27,19 +27,13 @@ public class SysCallRelaGuiServiceImpl implements SysCallRelaGuiService{
         return list;
     }
 
-
     @Override
-    public List<String> getSysNameXXX() {
-        return sysCallRelaGuiDao.getSysNameXXX();
+    public Integer getSysSuccCount(String sysname,String startTime,String endTime) {
+        return sysCallRelaGuiDao.getSysSuccCount(sysname,startTime,endTime);
     }
 
     @Override
-    public Integer getSysSuccCount(String sysname) {
-        return sysCallRelaGuiDao.getSysSuccCount(sysname);
-    }
-
-    @Override
-    public Integer getSysFailCount(String sysname) {
-        return sysCallRelaGuiDao.getSysFailCount(sysname);
+    public Integer getSysFailCount(String sysname,String startTime,String endTime) {
+        return sysCallRelaGuiDao.getSysFailCount(sysname,startTime,endTime);
     }
 }

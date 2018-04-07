@@ -10,23 +10,27 @@
         from sys_call_rela t
     </select>
 
-    <select id="getSysNameXXX" resultType="java.lang.String">
-        select ni.node_name
-        from sys_call_rela scr
-        left join node_info ni
-        on scr.now_route_node=ni.node_code
-        where scr.yn=0 and ni.node_name is not null
-    </select>
-
     <select id="getSysSuccCount" resultType="java.lang.Integer">
         select count(*) from trade_detail
         where zt = 0 and mbxt=#{sysname}
+        <if test="startTime != null and startTime !=''">
+            and ts &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and ts &lt;= #{endTime}
+        </if>
     </select>
 
 
     <select id="getSysFailCount" resultType="java.lang.Integer">
         select count(*) from trade_detail
         where zt = 1 and mbxt=#{sysname}
+        <if test="startTime != null and startTime !=''">
+            and ts &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and ts &lt;= #{endTime}
+        </if>
     </select>
 
 

@@ -3,6 +3,7 @@ package com.sys.mgr.controller;
 import com.sys.mgr.model.NodeInfoVo;
 import com.sys.mgr.service.SysServiceGuiService;
 import com.sys.mgr.utils.CommonUtil;
+import com.sys.mgr.utils.DateUtil;
 import com.sys.mgr.utils.DocumentUtil;
 import com.sys.mgr.utils.JsonResponse;
 import org.slf4j.Logger;
@@ -15,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by liangtao on 2018/3/25.
@@ -57,15 +55,27 @@ public class SysServiceGuiController {
 
     @RequestMapping("/getsyscount")
     @ResponseBody
-    public String  getsyscount(@RequestParam(value="nodecode") String nodecode){
+    public String  getsyscount(@RequestParam(value="nodecode") String nodecode,
+                               @RequestParam(value = "monitortime") String monitortime){
         long tid = System.nanoTime();
+        String startTime = null;
+        String endTime = DateUtil.getStringDate(new Date());;
+        if(monitortime.equals("hour")){
+            startTime = DateUtil.getStringDate(DateUtil.addHour(new Date(),-1));
+        }else if(monitortime.equals("minutes")){
+            startTime = DateUtil.getTimeByMinute(-5);
+        }else if(monitortime.equals("day")){
+            startTime = DateUtil.getStrDataDay(new Date(),-1);
+        }else {
+            return JsonResponse.errorResponse(-1,"监控周期参数异常").toJSON();
+        }
         try {
             List<NodeInfoVo> sysname = sysServiceGuiService.getServiceName(nodecode);
             List<String> count = new ArrayList<String>();
             if(!CollectionUtils.isEmpty(sysname)){
                 for(NodeInfoVo str:sysname){
-                    Integer succNum = sysServiceGuiService.getSuccCount(str.getNextRouteNode());
-                    Integer failNum = sysServiceGuiService.getFailCount(str.getNextRouteNode());
+                    Integer succNum = sysServiceGuiService.getSuccCount(str.getNextRouteNode(),startTime,endTime);
+                    Integer failNum = sysServiceGuiService.getFailCount(str.getNextRouteNode(),startTime,endTime);
                     count.add(str.getNextRouteNode()+","+succNum+","+failNum);
                 }
             }

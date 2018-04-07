@@ -14,9 +14,11 @@ public interface SysCallRelaGuiDao {
 
     List<NodeInfoVo> getSysName();
 
-    List<String> getSysNameXXX();
+    Integer getSysSuccCount(@Param("sysname") String sysname,
+                            @Param("startTime") String startTime,
+                            @Param("endTime") String endTime);
 
-    Integer getSysSuccCount(@Param("sysname") String sysname);
-
-    Integer getSysFailCount(@Param("sysname") String sysname);
+    Integer getSysFailCount(@Param("sysname") String sysname,
+                            @Param("startTime") String startTime,
+                            @Param("endTime") String endTime);
 }

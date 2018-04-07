@@ -11,7 +11,7 @@ public interface SysServiceGuiService {
 
     List<NodeInfoVo> getServiceName(String nodecode);
 
-    Integer getSuccCount(String serviceName);
+    Integer getSuccCount(String serviceName,String startTime,String endTime);
 
-    Integer getFailCount(String serviceName);
+    Integer getFailCount(String serviceName,String startTime,String endTime);
 }

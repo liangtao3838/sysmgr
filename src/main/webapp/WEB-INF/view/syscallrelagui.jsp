@@ -29,11 +29,13 @@
 <script type="text/javascript">
 
     $(function () {
+        var monitortime = $("#monitortime").val();
         $.ajax({
             url: "/syscallrelagui/getsyscount.do",
             dataType: "json",
             type: "post",
             async: false,
+            data:{monitortime:monitortime},
             success : function(data){
                 var nodes=data.result.count;
                 var content = "";

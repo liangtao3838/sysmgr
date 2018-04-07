@@ -24,11 +24,11 @@ public class SysServiceGuiServiceImpl implements SysServiceGuiService {
         return sysServiceGuiDao.getServiceName(nodecode);
     }
 
-    public Integer getSuccCount(String serviceName){
-        return sysServiceGuiDao.getSuccCount(serviceName);
+    public Integer getSuccCount(String serviceName,String startTime,String endTime){
+        return sysServiceGuiDao.getSuccCount(serviceName,startTime,endTime);
     }
 
-    public Integer getFailCount(String servieName){
-        return sysServiceGuiDao.getFailCount(servieName);
+    public Integer getFailCount(String servieName,String startTime,String endTime){
+        return sysServiceGuiDao.getFailCount(servieName,startTime,endTime);
     }
 }

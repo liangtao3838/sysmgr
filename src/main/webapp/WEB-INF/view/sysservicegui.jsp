@@ -30,12 +30,13 @@
     var par = window.location.search;
     var arr=par.split("=");
     var nodecode=arr[arr.length-1];
+    var monitortime = $("#monitortime").val();
     $(function () {
         $.ajax({
             url: "/sysservicegui/getsyscount.do",
             dataType: "json",
             type: "post",
-            data:{nodecode:nodecode},
+            data:{nodecode:nodecode,monitortime:monitortime},
             async: false,
             success : function(data){
                 var nodes=data.result.count;

@@ -11,9 +11,7 @@ public interface SysCallRelaGuiService {
 
     List<NodeInfoVo> getSysName();
 
-    List<String> getSysNameXXX();
+    Integer getSysSuccCount(String sysname,String startTime,String endTime);
 
-    Integer getSysSuccCount(String sysname);
-
-    Integer getSysFailCount(String sysname);
+    Integer getSysFailCount(String sysname,String startTime,String endTime);
 }

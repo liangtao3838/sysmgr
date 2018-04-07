@@ -37,6 +37,9 @@ public class CommonUtil {
     }
 
     public static Map<String,List<NodeInfoVo>> dataServiceConvert(List<NodeInfoVo> list){
+        if(org.springframework.util.CollectionUtils.isEmpty(list)){
+            return null;
+        }
         Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
         List<NodeInfoVo> serviceNodeInfoVo1 = new ArrayList<NodeInfoVo>();
         map.put(list.get(0).getNowRouteNode(),list);

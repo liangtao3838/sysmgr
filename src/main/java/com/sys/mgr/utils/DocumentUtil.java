@@ -97,8 +97,8 @@ public class DocumentUtil {
         for(NodeInfoVo nodeInfoVo:nodeInfoVos){
             Element edge = edges.addElement("edge");
             edge.addAttribute("id","0");
-            edge.addAttribute("source",nodeInfoVo.getNextRouteNode());
-            edge.addAttribute("target",nodeInfoVo.getNowRouteNode());
+            edge.addAttribute("source",nodeInfoVo.getNowRouteNode());
+            edge.addAttribute("target",nodeInfoVo.getNextRouteNode());
             Element edge_attvalues = edge.addElement("attvalues");
             edge_attvalues.setText("");
         }

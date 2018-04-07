@@ -70,7 +70,7 @@
                     <a href="#">
                         <i class="fa fa-files-o"></i>
                         <span>大屏界面展示</span>
-                        <span class="label label-primary pull-right">3</span>
+                        <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/syscallrelagui/index.do" target="content"><i class="fa fa-circle-o text-red"></i><span>系统监控功能图</span></a></li>
@@ -85,14 +85,6 @@
     <div class="content-wrapper">
         <iframe name="content" src="index.html" style="overflow: hidden;" frameborder="0" width="100%" height="100%"></iframe>
     </div><!-- /.content-wrapper -->
-
-
-    <%--<footer class="main-footer">--%>
-        <%--<div class="pull-right hidden-xs">--%>
-            <%--<b>Version</b> 2.3.0--%>
-        <%--</div>--%>
-        <%--<strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.--%>
-    <%--</footer>--%>
 
 
     <aside class="control-sidebar control-sidebar-dark">
