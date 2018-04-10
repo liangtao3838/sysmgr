@@ -1,5 +1,6 @@
 package com.sys.mgr.utils;
 
+import com.sys.mgr.model.NodeInfo;
 import com.sys.mgr.model.NodeInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -68,25 +69,24 @@ public class CommonUtil {
                 if(flag){
                     continue;
                 }
-                if(map.containsKey(nodeInfo.getNowRouteNode())){
-                    map.get(nodeInfo.getNowRouteNode()).add(nodeInfo);
-                }else{
-                    List<NodeInfoVo> nodeInfos1 = new ArrayList<NodeInfoVo>();
-                    nodeInfos1.add(nodeInfo);
-                    map.put(nodeInfo.getNowRouteNode(),list);
-                }
+                getMap(map,nodeInfo,list);
             }else {
-                if(map.containsKey(nodeInfo.getNowRouteNode())){
-                    map.get(nodeInfo.getNowRouteNode()).add(nodeInfo);
-                }else{
-                    List<NodeInfoVo> nodeInfos1 = new ArrayList<NodeInfoVo>();
-                    nodeInfos1.add(nodeInfo);
-                    map.put(nodeInfo.getNowRouteNode(),list);
-                }
+                getMap(map,nodeInfo,list);
             }
         }
         return map;
     }
+
+    public static void getMap(Map<String,List<NodeInfoVo>> map, NodeInfoVo nodeInfo,List<NodeInfoVo> list){
+        if(map.containsKey(nodeInfo.getNowRouteNode())){
+            map.get(nodeInfo.getNowRouteNode()).add(nodeInfo);
+        }else{
+            List<NodeInfoVo> nodeInfos1 = new ArrayList<NodeInfoVo>();
+            nodeInfos1.add(nodeInfo);
+            map.put(nodeInfo.getNowRouteNode(),list);
+        }
+    }
+
 
     public static String getRandomValue(){
        return b[new Random().nextInt(1000)]+"";
