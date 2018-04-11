@@ -42,7 +42,6 @@ public class CommonUtil {
             return null;
         }
         Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
-        List<NodeInfoVo> serviceNodeInfoVo1 = new ArrayList<NodeInfoVo>();
         map.put(list.get(0).getNowRouteNode(),list);
         for (NodeInfoVo vo:list){
             map.put(vo.getNextRouteNode(),null);
@@ -52,7 +51,7 @@ public class CommonUtil {
 
     public static Map<String,List<NodeInfoVo>> dataConvert( List<NodeInfoVo> list){
 
-        if(CollectionUtils.isEmpty(list)){
+        /*if(CollectionUtils.isEmpty(list)){
             return null;
         }
         Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
@@ -74,8 +73,65 @@ public class CommonUtil {
                 getMap(map,nodeInfo,list);
             }
         }
+        return map;*/
+
+        Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
+        for(NodeInfoVo t:list){
+            List<NodeInfoVo> edge = new ArrayList<NodeInfoVo>();
+            map.put(t.getNowRouteNode(),edge);
+            map.put(t.getNextRouteNode(),edge);
+            /*if(map.containsKey(t.getNowRouteNode())){
+                List<NodeInfoT> edgs = map.get(t.getNowRouteNode());
+                edgs.add(t);
+                map.put(t.getNowRouteNode(),edgs);
+            }
+            if(map.containsKey(t.getNextRouteNode())){
+                List<NodeInfoT> edgs = map.get(t.getNextRouteNode());
+                NodeInfoT nodeInfoT = new NodeInfoT(t.getNextRouteNode(),t.getNowRouteNode());
+                edgs.add(nodeInfoT);
+                map.put(t.getNextRouteNode(),edgs);
+            }*/
+
+            /*List<NodeInfoT> edgeNow = new ArrayList<NodeInfoT>();
+            edgeNow.add(t);
+            map.put(t.getNowRouteNode(),edgeNow);
+            List<NodeInfoT> edgeNext = new ArrayList<NodeInfoT>();
+            edgeNext.add(new NodeInfoT(t.getNextRouteNode(),t.getNowRouteNode()));
+            map.put(t.getNextRouteNode(),edgeNext);*/
+        }
+        for(NodeInfoVo t1:list){
+            if(map.containsKey(t1.getNowRouteNode())){
+                List<NodeInfoVo> now = map.get(t1.getNowRouteNode());
+                now.add(t1);
+                map.put(t1.getNowRouteNode(),now);
+            }
+            if(map.containsKey(t1.getNextRouteNode())){
+                List<NodeInfoVo> edgs = map.get(t1.getNextRouteNode());
+                NodeInfoVo nodeInfoVo = new NodeInfoVo();
+                nodeInfoVo.setNowRouteNode(nodeInfoVo.getNextRouteNode());
+                nodeInfoVo.setNextRouteNode(nodeInfoVo.getNowRouteNode());
+                edgs.add(nodeInfoVo);
+                map.put(t1.getNextRouteNode(),edgs);
+            }
+        }
         return map;
     }
+
+    /*public static void main(String[] args){
+        NodeInfoT info1= new NodeInfoT("ESB","ESC");
+        NodeInfoT info2= new NodeInfoT("EKA","ESB");
+        NodeInfoT info3= new NodeInfoT("ECA","EBC");
+        NodeInfoT info4= new NodeInfoT("EKD","EBC");
+        NodeInfoT info5= new NodeInfoT("ESB","EKC");
+        List<NodeInfoT> list = new ArrayList<NodeInfoT>();
+        list.add(info1);
+        list.add(info2);
+        list.add(info3);
+        list.add(info4);
+        list.add(info5);
+        Map<String,List<NodeInfoT>> map = dataConvert(list);
+        System.out.println(DocumentUtilTEST.getXMl(map));
+    }*/
 
     public static void getMap(Map<String,List<NodeInfoVo>> map, NodeInfoVo nodeInfo,List<NodeInfoVo> list){
         if(map.containsKey(nodeInfo.getNowRouteNode())){
@@ -95,3 +151,32 @@ public class CommonUtil {
 
 
 }
+
+/*class NodeInfoT{
+    private String nowRouteNode;
+    private String nextRouteNode;
+
+    public NodeInfoT() {
+    }
+
+    public NodeInfoT(String nowRouteNode, String nextRouteNode) {
+        this.nowRouteNode = nowRouteNode;
+        this.nextRouteNode = nextRouteNode;
+    }
+
+    public String getNowRouteNode() {
+        return nowRouteNode;
+    }
+
+    public void setNowRouteNode(String nowRouteNode) {
+        this.nowRouteNode = nowRouteNode;
+    }
+
+    public String getNextRouteNode() {
+        return nextRouteNode;
+    }
+
+    public void setNextRouteNode(String nextRouteNode) {
+        this.nextRouteNode = nextRouteNode;
+    }
+}*/
