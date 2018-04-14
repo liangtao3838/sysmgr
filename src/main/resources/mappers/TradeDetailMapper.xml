@@ -81,6 +81,7 @@
         <if test="request.endDate != null and request.endDate !=''">
             and lrrq &lt;= #{request.endDate}
         </if>
+        limit #{request.startRow},#{request.pageSize}
     </select>
 
 

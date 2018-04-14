@@ -108,7 +108,7 @@ public class ExcelDataExportUtil {
     private static OutputStream getOutputStream(HttpServletResponse response) throws IOException {
 
         response.setContentType("application/octet-stream");
-        response.setHeader("content-disposition", "attachment;filename=" + System.currentTimeMillis() + ".xls");
+        response.setHeader("content-disposition", "attachment;filename=" + System.currentTimeMillis() + ".xlsx");
         return response.getOutputStream();
     }
 

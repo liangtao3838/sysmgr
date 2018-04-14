@@ -119,8 +119,11 @@ public class TradeDetailController {
             public Object[][] getExportData() {
                 if(startRow == null){
                     startRow = request.getStartRow();
+                    request.setPageSize(pageSize);
+                    request.setPageSize(pageSize);
                 }else{
                     request.setStartRow(startRow);
+                    request.setPageSize(pageSize);
                 }
                 if(startRow == null){
                     throw new RuntimeException("startRow can't be null");
@@ -131,7 +134,7 @@ public class TradeDetailController {
                 if(CollectionUtils.isEmpty(ExceptsData)){
                     return null;
                 }
-                Object[][] data = new Object[ExceptsData.size()][14];
+                Object[][] data = new Object[ExceptsData.size()][8];
                 for(int i = 0;i < ExceptsData.size();i++){
                     data[i][0] = ExceptsData.get(i).getJkmc();
                     data[i][1] = ExceptsData.get(i).getQqxt();
