@@ -309,6 +309,12 @@
       </exclusions>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.10-FINAL</version>
+    </dependency>
+
     <!-- JUnit4 begin -->
     <dependency>
       <groupId>junit</groupId>

@@ -1,6 +1,8 @@
 package com.sys.mgr.service.Impl;
 
 import com.sys.mgr.dao.TradeDetailDao;
+import com.sys.mgr.model.ExceptRequest;
+import com.sys.mgr.model.ExportResponse;
 import com.sys.mgr.model.TradeDetail;
 import com.sys.mgr.service.TradeDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +32,13 @@ public class TradeDetailServiceImpl implements TradeDetailService {
     @Override
     public String getXMl(long id, String type) {
         return tradeDetailDao.getXMl(id,type);
+    }
+
+    @Override
+    public ExportResponse getExport(ExceptRequest request) {
+        List<TradeDetail> list = tradeDetailDao.getExport(request);
+        ExportResponse response = new ExportResponse();
+        response.setList(list);
+        return response;
     }
 }

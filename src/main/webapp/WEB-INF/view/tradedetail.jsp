@@ -59,6 +59,7 @@
                         <input name = "date" id="endDate" type="text" class="form-control">
                     </div>
                     <button type="button" class="btn btn-info" onclick="query()">查询</button>
+                    <button type="button" class="btn btn-info" onclick="exportDetail()">查询</button>
                 </td>
             </tr>
         </table>

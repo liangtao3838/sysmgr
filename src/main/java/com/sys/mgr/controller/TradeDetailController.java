@@ -1,9 +1,15 @@
 package com.sys.mgr.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sys.mgr.model.ExceptRequest;
+import com.sys.mgr.model.ExportResponse;
 import com.sys.mgr.model.SysService;
 import com.sys.mgr.model.TradeDetail;
+import com.sys.mgr.service.DataExportCommonProcessor;
 import com.sys.mgr.service.TradeDetailService;
+import com.sys.mgr.utils.ExcelDataExportUtil;
 import com.sys.mgr.utils.JsonResponse;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,5 +85,78 @@ public class TradeDetailController {
             log.error("tid:{} 获取交易相应明细异常,id:{},type",tid,id,type,e);
             return JsonResponse.errorResponse(-1,"error").toJSON();
         }
+    }
+
+    @RequestMapping("exportTradeDetail.do")
+    public void exportOrderRealtimeStatus(@RequestParam(value = "jkmc") String jkmc,
+                                          @RequestParam(value = "qqxt") String qqxt,
+                                          @RequestParam(value = "zt") String zt,
+                                          @RequestParam(value = "startDate") String startDate,
+                                          @RequestParam(value = "endDate") String endDate,
+                                          HttpServletResponse response) throws Exception {
+
+        final ExceptRequest request = new ExceptRequest();
+        request.setJkmc(jkmc);
+        request.setEndDate(endDate);
+        request.setStartDate(startDate);
+        request.setQqxt(qqxt);
+        request.setZt(zt);
+        List<String>title = new ArrayList<String>();
+        title.add("接口名称");
+        title.add("请求系统");
+        title.add("目标系统");
+        title.add("目标接口名称");
+        title.add("阶段位置");
+        title.add("系统异常状态");
+        title.add("业务异常状态");
+        title.add("录入日期");
+        ExcelDataExportUtil.exportDataUtil(title,new DataExportCommonProcessor(){
+
+            Integer startRow = 0;
+            Integer pageSize = 1000;
+
+            @Override
+            public Object[][] getExportData() {
+                if(startRow == null){
+                    startRow = request.getStartRow();
+                }else{
+                    request.setStartRow(startRow);
+                }
+                if(startRow == null){
+                    throw new RuntimeException("startRow can't be null");
+                }
+
+                ExportResponse resp = tradeDetailService.getExport(request);
+                List<TradeDetail> ExceptsData = resp.getList();
+                if(CollectionUtils.isEmpty(ExceptsData)){
+                    return null;
+                }
+                Object[][] data = new Object[ExceptsData.size()][14];
+                for(int i = 0;i < ExceptsData.size();i++){
+                    data[i][0] = ExceptsData.get(i).getJkmc();
+                    data[i][1] = ExceptsData.get(i).getQqxt();
+                    data[i][2] = ExceptsData.get(i).getMbxt();
+                    data[i][3] = ExceptsData.get(i).getMbjk();
+                    data[i][4] = ExceptsData.get(i).getJdwz();
+                    data[i][5] = ExceptsData.get(i).getZt();
+                    data[i][6] = ExceptsData.get(i).getZt();
+                    data[i][7] = ExceptsData.get(i).getLrrq();
+                }
+                startRow = startRow + data.length;
+                return data;
+            }
+
+            @Override
+            public Object[][] getExportData(Integer startRow, Integer pageSize) {
+                return new Object[0][];
+            }
+
+            @Override
+            public void resetPos() {
+                startRow = 0;
+                pageSize = 1000;
+            }
+        },null,response);
+
     }
 }

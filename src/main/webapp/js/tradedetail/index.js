@@ -137,4 +137,31 @@
         });
     }
 
+    function exportDetail() {
+        var jkmc = document.getElementById("syscallname").value;
+        var qqxt = document.getElementById("qqxt").value;
+        var zt = $('#zt option:selected').val();
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
+        $.ajax({
+            type: "POST",
+            url: "/tradedetail/exportTradeDetail.do",
+            data: {
+                jkmc:jkmc,
+                qqxt:qqxt,
+                zt:zt,
+                startDate:startDate,
+                endDate:endDate
+            },
+            dataType: "json",
+            success:function(data){
+                if(data.code==1){
+
+                }else{
+
+                }
+            }
+        });
+    }
+
 

@@ -1,5 +1,6 @@
 package com.sys.mgr.dao;
 
+import com.sys.mgr.model.ExceptRequest;
 import com.sys.mgr.model.TradeDetail;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,6 @@ public interface TradeDetailDao {
             @Param("endDate") String endDate);
 
     String getXMl(@Param("id") Long id,@Param("type") String type);
+
+    List<TradeDetail> getExport(@Param("request") ExceptRequest request);
 }
