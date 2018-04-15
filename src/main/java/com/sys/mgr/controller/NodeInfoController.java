@@ -39,7 +39,7 @@ public class NodeInfoController {
         return new ModelAndView("nodemgr");
     }
 
-    @RequestMapping("list")
+    @RequestMapping(value = "list",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getList(
             @RequestParam(value = "page",  defaultValue = "0") Integer offset,
@@ -58,7 +58,7 @@ public class NodeInfoController {
         }
     }
 
-    @RequestMapping("add")
+    @RequestMapping(value = "add",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String  add(NodeInfo info){
         long tid = System.nanoTime();
@@ -71,7 +71,7 @@ public class NodeInfoController {
         }
     }
 
-    @RequestMapping("update")
+    @RequestMapping(value = "update",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String update(NodeInfo info){
         long tid = System.nanoTime();
@@ -84,7 +84,7 @@ public class NodeInfoController {
         }
     }
 
-    @RequestMapping("delete")
+    @RequestMapping(value = "delete",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String del(
             @RequestParam(value = "idlist") String idlist
@@ -103,7 +103,7 @@ public class NodeInfoController {
         }
     }
 
-    @RequestMapping("query")
+    @RequestMapping(value = "query",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String query(String id){
         long tid = System.nanoTime();

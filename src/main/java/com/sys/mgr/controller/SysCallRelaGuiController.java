@@ -41,7 +41,7 @@ public class SysCallRelaGuiController {
     }
 
 
-    @RequestMapping("/getsysname")
+    @RequestMapping(value = "/getsysname",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getSysName(){
         long tid = System.nanoTime();
@@ -58,7 +58,7 @@ public class SysCallRelaGuiController {
         }
     }
 
-    @RequestMapping("/getNodeInfo")
+    @RequestMapping(value = "/getNodeInfo",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getNodeInfo(){
         long tid = System.nanoTime();
@@ -72,7 +72,7 @@ public class SysCallRelaGuiController {
         }
     }
 
-    @RequestMapping("/getsyscount")
+    @RequestMapping(value = "/getsyscount",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getsyscount(
             @RequestParam(value = "monitortime") String monitortime

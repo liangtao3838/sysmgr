@@ -88,7 +88,7 @@ public class TradeDetailController {
         }
     }
 
-    @RequestMapping("exportTradeDetail.do")
+    @RequestMapping(value = "exportTradeDetail.do",produces= "text/plain;charset=UTF-8")
     public void exportOrderRealtimeStatus(@RequestParam(value = "jkmc") String jkmc,
                                           @RequestParam(value = "qqxt") String qqxt,
                                           @RequestParam(value = "zt") String zt,

@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sys.mgr.dao.TradeDetailDao">
     <resultMap type="java.util.Map" id="qqxmlResultMap" >
-    <result property="qqxml" column="qqxml"  typeHandler="com.sys.mgr.utils.MyBlobTypeHandler" />
+        <result property="qqxml" column="qqxml"  typeHandler="com.sys.mgr.utils.MyBlobTypeHandler" />
+        <result property="fhxml" column="fhxml"  typeHandler="com.sys.mgr.utils.MyBlobTypeHandler" />
+        <result property="xyxml" column="xyxml"  typeHandler="com.sys.mgr.utils.MyBlobTypeHandler" />
+        <result property="ycxx" column="ycxx"  typeHandler="com.sys.mgr.utils.MyBlobTypeHandler" />
     </resultMap>
 
     <select id="getList" resultType="com.sys.mgr.model.TradeDetail">
@@ -66,6 +69,8 @@
         FROM `trade_detail`
         where id =#{id}
     </select>
+
+
 
     <select id="getExport" resultType="com.sys.mgr.model.TradeDetail">
         SELECT `id` ,`uuid`,`jkmc`, `qqxt`,`mbxt`,`mbjk`,`qqxml`,`fhxml`,`xyxml`,`ycxx`,

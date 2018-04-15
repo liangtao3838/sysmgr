@@ -33,7 +33,7 @@ public class SysServiceController {
     @Autowired
     SysServiceService sysServiceService;
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index",produces= "text/plain;charset=UTF-8")
     public ModelAndView index(){
         return new ModelAndView("sysservice");
     }
@@ -57,7 +57,7 @@ public class SysServiceController {
         }
     }
 
-    @RequestMapping("add")
+    @RequestMapping(value = "add",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String add(SysService info){
         long tid = System.nanoTime();
@@ -71,7 +71,7 @@ public class SysServiceController {
     }
 
 
-    @RequestMapping("update")
+    @RequestMapping(value = "update",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String update(SysService info){
         long tid = System.nanoTime();
@@ -84,7 +84,7 @@ public class SysServiceController {
         }
     }
 
-    @RequestMapping("delete")
+    @RequestMapping(value = "delete",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String del(
             @RequestParam(value = "idlist") String idlist
@@ -103,7 +103,7 @@ public class SysServiceController {
         }
     }
 
-    @RequestMapping("query")
+    @RequestMapping(value = "query",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String query(String id){
         long tid = System.nanoTime();

@@ -36,7 +36,7 @@ public class SysServiceGuiController {
         return new ModelAndView("sysservicegui");
     }
 
-    @RequestMapping("/getsysname")
+    @RequestMapping(value = "/getsysname",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getSysName(
             @RequestParam(value="nodecode") String nodecode
@@ -53,7 +53,7 @@ public class SysServiceGuiController {
         }
     }
 
-    @RequestMapping("/getsyscount")
+    @RequestMapping(value = "/getsyscount",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String  getsyscount(@RequestParam(value="nodecode") String nodecode,
                                @RequestParam(value = "monitortime") String monitortime){

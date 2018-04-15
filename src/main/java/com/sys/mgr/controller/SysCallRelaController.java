@@ -36,7 +36,7 @@ public class SysCallRelaController {
         return new ModelAndView("syscallrela");
     }
 
-    @RequestMapping("list")
+    @RequestMapping(value = "list",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getList(
             @RequestParam(value = "page",  defaultValue = "0") Integer offset,
@@ -56,7 +56,7 @@ public class SysCallRelaController {
         }
     }
 
-    @RequestMapping("add")
+    @RequestMapping(value = "add",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String add(SysCallRela info){
         long tid = System.nanoTime();
@@ -69,7 +69,7 @@ public class SysCallRelaController {
         }
     }
 
-    @RequestMapping("update")
+    @RequestMapping(value = "update",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String update(SysCallRela info){
         long tid = System.nanoTime();
@@ -82,7 +82,7 @@ public class SysCallRelaController {
         }
     }
 
-    @RequestMapping("delete")
+    @RequestMapping(value = "delete",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String del(
             @RequestParam(value = "idlist") String idlist
@@ -101,7 +101,7 @@ public class SysCallRelaController {
         }
     }
 
-    @RequestMapping("query")
+    @RequestMapping(value = "query",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String query(String id){
         long tid = System.nanoTime();

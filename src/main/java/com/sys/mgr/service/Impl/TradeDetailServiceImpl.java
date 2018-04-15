@@ -5,6 +5,7 @@ import com.sys.mgr.model.ExceptRequest;
 import com.sys.mgr.model.ExportResponse;
 import com.sys.mgr.model.TradeDetail;
 import com.sys.mgr.service.TradeDetailService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,28 @@ public class TradeDetailServiceImpl implements TradeDetailService {
 
     @Override
     public String getXMl(long id, String type) {
-        return tradeDetailDao.getXMl(id,type).get("qqxml");
+        String xml="";
+        if(tradeDetailDao.getXMl(id,type)==null){
+            return xml;
+        }
+        if(type.equals("qqxml")){
+            xml=tradeDetailDao.getXMl(id,type).get("qqxml");
+
+        }else if(type.equals("fhxml")){
+            xml=tradeDetailDao.getXMl(id,type).get("fhxml");
+        }else if(type.equals("xyxml")){
+            xml= tradeDetailDao.getXMl(id,type).get("xyxml");
+        }else if(type.equals("ycxx")){
+            xml= tradeDetailDao.getXMl(id,type).get("ycxx");
+        }else {
+            return "参数错误";
+        }
+        if(StringUtils.isBlank(xml)){
+            return "";
+        }else {
+            return xml;
+        }
+
     }
 
     @Override
