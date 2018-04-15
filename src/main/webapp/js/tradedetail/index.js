@@ -73,24 +73,34 @@
                 title: '目标接口名称',
                 width: '9%',
             },{
-                field: 'qqxml',
+                field: '',
                 title: '请求xml',
                 width: '9%',
+                formatter : function (dataValue,row,index) {
+                    var type = "qqxml";
+                    return '<a href="#" onclick="queryxml('+row.id+',\'qqxml\')">查看</a>';
+                }
             },{
-                field: 'fhxml',
+                field: '',
                 title: '返回xml',
                 width: '9%',
                 formatter : function (dataValue,row,index) {
-                    return '<a href="#" onclick="queryqqxml('+row.id+')">查看</a>';
+                    return '<a href="#" onclick="queryxml('+row.id+',\'fhxml\')">查看</a>';
                 }
             },{
-                field: 'xyxml',
+                field: '',
                 title: '相应xml',
                 width: '9%',
+                formatter : function (dataValue,row,index) {
+                    return '<a href="#" onclick="queryxml('+row.id+',\'xyxml\')">查看</a>';
+                }
             },{
-                field: 'ycxx',
+                field: '',
                 title: '异常信息',
                 width: '9%',
+                formatter : function (dataValue,row,index) {
+                    return '<a href="#" onclick="queryxml('+row.id+',\'ycxx\')">查看</a>';
+                }
             },{
                 field: 'jdwz',
                 title: '阶段位置',
@@ -117,13 +127,15 @@
         InitTradeDetailQueryTableParam();
     }
 
-    function queryqqxml(id){
+    function queryxml(id,type){
+        console.log(id);
+        console.log(type);
         $.ajax({
             type: "POST",
             url: "/tradedetail/getxml.do",
             data: {
                 id:id,
-                type:"qqxml"
+                type:type
             },	//传入已封装的参数
             dataType: "json",
             success:function(data){

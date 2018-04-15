@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,7 @@ public class TradeDetailController {
     }
 
 
-    @RequestMapping("list")
+    @RequestMapping(value = "list",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getList(
             @RequestParam(value = "syscallname") String syscallname,
@@ -69,7 +70,7 @@ public class TradeDetailController {
     }
 
 
-    @RequestMapping("getxml")
+    @RequestMapping(value = "getxml",produces= "text/plain;charset=UTF-8")
     @ResponseBody
     public String getXml(
             @RequestParam(value = "id") Long id,

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liangtao on 2018/3/25.
@@ -29,7 +30,7 @@ public interface TradeDetailDao {
             @Param("startDate") String startDate,
             @Param("endDate") String endDate);
 
-    String getXMl(@Param("id") Long id,@Param("type") String type);
+    Map<String,String> getXMl(@Param("id") Long id, @Param("type") String type);
 
     List<TradeDetail> getExport(@Param("request") ExceptRequest request);
 }

@@ -31,7 +31,7 @@ public class TradeDetailServiceImpl implements TradeDetailService {
 
     @Override
     public String getXMl(long id, String type) {
-        return tradeDetailDao.getXMl(id,type);
+        return tradeDetailDao.getXMl(id,type).get("qqxml");
     }
 
     @Override
