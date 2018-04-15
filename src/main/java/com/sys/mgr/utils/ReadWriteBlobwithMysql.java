@@ -48,13 +48,13 @@ public class ReadWriteBlobwithMysql
 
     public void insert(Connection con) throws SQLException
     {
-        String fileName = "D:\\资料\\笔记\\zookeeper\\zookeeper2.txt";
+        String fileName = "/Users/liangtao/Documents/技术资料/java基础/java反射";
         File file = new File(fileName);
 
         try
         {
             FileInputStream fis = new FileInputStream(file);
-            String sql = "update trade_detail set qqxml=? WHERE id=2";
+            String sql = "update trade_detail set xyxml=? WHERE id=1";
             PreparedStatement prest = con.prepareStatement(sql);
             prest.setBlob(1, fis,file.length());
             prest.execute();
