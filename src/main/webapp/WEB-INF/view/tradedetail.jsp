@@ -67,12 +67,34 @@
 </div>
 
 <!--添加页面model-begin-->
+<%--<div class="modal fade" id="tradedetailConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">--%>
+    <%--<div class="modal-dialog modal-md" role="document">--%>
+        <%--<form id="" method="post" action="">--%>
+            <%--<div class="modal-content">--%>
+                <%--<div class="modal-header" >--%>
+                    <%--<h3 class="modal-title" style="background-color: #3c8dbc" id="myModalLabel4">XML信息</h3>--%>
+                    <%--<textarea name = "responseInfo" readonly id="responseInfo" style="font-size: smaller;width:400px;height: 400px;" class="form-control" placeholder=""></textarea>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</form>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
 <div class="modal fade" id="tradedetailConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">
     <div class="modal-dialog modal-md" role="document">
-        <div class="input-group" >
-            <h3 class="modal-title" style="background-color: #3c8dbc" id="myModalLabel4">XML信息</h3>
-            <textarea name = "responseInfo" readonly id="responseInfo" style="font-size: smaller;width:400px;height: 400px;" class="form-control" placeholder=""></textarea>
-        </div>
+        <form id="addNodeInfo" method="post" action="">
+            <input type="hidden" id="addId"/>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel4">XML信息</h4>
+                </div>
+                <div class="modal-body">
+                        <textarea name = "responseInfo" readonly id="responseInfo" style="font-size: smaller;width:570px;height: 400px;" class="form-control" placeholder=""></textarea>
+                </div>
+
+            </div>
+        </form>
     </div>
 </div>
 
