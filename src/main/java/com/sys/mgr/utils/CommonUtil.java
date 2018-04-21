@@ -41,7 +41,7 @@ public class CommonUtil {
         if(org.springframework.util.CollectionUtils.isEmpty(list)){
             return null;
         }
-        Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
+        Map<String,List<NodeInfoVo>> map = new LinkedHashMap<String, List<NodeInfoVo>>();
         map.put(list.get(0).getNowRouteNode(),list);
         for (NodeInfoVo vo:list){
             map.put(vo.getNextRouteNode(),new ArrayList<NodeInfoVo>());
@@ -75,7 +75,7 @@ public class CommonUtil {
         }
         return map;*/
 
-        Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
+        Map<String,List<NodeInfoVo>> map = new LinkedHashMap<String, List<NodeInfoVo>>();
         for(NodeInfoVo t:list){
             List<NodeInfoVo> edge = new ArrayList<NodeInfoVo>();
             map.put(t.getNowRouteNode(),edge);
