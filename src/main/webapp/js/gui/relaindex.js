@@ -47,7 +47,7 @@ function graphData() {
                 seriesData.push({name: ''+key+'',symbolSize: 100,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
                 for(var i = 0;i<resultData[key].length;i++){  //循环LIST
                     var veh = resultData[key][i];//获取LIST里面的对象
-                    seriesLinks.push({source: ''+veh.nowRouteNode+'',target: ''+veh.nextRouteNode+'',value: '',lineStyle: {normal: {color: {type: 'linear',x: 0,y: 0,x2: 0,y2: 1,colorStops: [{offset: 0, color: '#e0f55a'}, {offset: 1, color: '#639564'}],globalCoord: false}}}})
+                    seriesLinks.push({source: ''+veh.nowRouteNode+'',target: ''+veh.nextRouteNode+'',value: '',lineStyle: {normal: {color: {type: 'linear',x: 0,y: 0,x2: 0,y2: 1,colorStops: [{offset: 0, color: '#FF4500'}, {offset: 1, color: '#FF4500'}],globalCoord: false}}}})
                 }
             }
         },
@@ -55,7 +55,7 @@ function graphData() {
 }
 
 var optionData={
-    backgroundColor: '#1a4377',
+    backgroundColor: '#D1EEEE;',
     tooltip: {},
     animationDurationUpdate: 1500,
     animationEasingUpdate: 'quinticInOut',
