@@ -4,25 +4,28 @@ var legendData = new Array();
 var seriesCategories = new Array();
 var seriesData = new Array();
 var seriesLinks = new Array();
+var par = window.location.search;
+var arr=par.split("=");
+var nodecode=arr[arr.length-1];
 $(function () {
     monitor();
     graphData();
  });
 
-function monitor() {
+function monitor(){
     var monitortime = $("#monitortime").val();
     $.ajax({
-        url: "/syscallrelagui/getsyscount.do",
+        url: "/sysservicegui/getsyscount.do",
         dataType: "json",
         type: "post",
+        data:{nodecode:nodecode,monitortime:monitortime},
         async: false,
-        data: {monitortime: monitortime},
-        success: function (data) {
-            var nodes = data.result.count;
+        success : function(data){
+            var nodes=data.result.count;
             var content = "";
-            $.each(nodes, function (i, item) {
+            $.each(nodes, function(i, item){
                 var arr = item.split(",");
-                content += '<span><a href="/sysservicegui/index.do?nodecode=' + arr[0] + '">' + arr[0] + '系统</a></span></br>';
+                content += '<span>'+arr[0]+'系统</span></br>';
                 content += '<span>成功</span><input type="text" style="border: 0px;background-color: #D1EEEE" readonly value="[' + arr[1] + ']">';
                 content += '<span>失败</span><input type="text" style="border: 0px;background-color: #D1EEEE" readonly value="[' + arr[2] + ']">';
                 content += '</br>'
@@ -33,11 +36,11 @@ function monitor() {
 }
 function graphData() {
     $.ajax({
-        url: "/syscallrelagui/getsysname.do",
+        url: "/sysservicegui/getsysname.do",
         dataType: "json",
         type: "post",
         async: false,
-        data: {},
+        data:{nodecode:nodecode},
         success: function (data) {
             resultData = data.result;
             console.log(resultData);
@@ -104,13 +107,11 @@ var optionData={
     ]
 };
 
-
-
-
 require([
     'echarts'
 ], function (ec) {
     echarts = ec;
     option = optionData;
+    console.log(JSON.stringify(optionData));
     testHelper.createChart(echarts, 'right', option);
 });

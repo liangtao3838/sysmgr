@@ -16,7 +16,7 @@
 </head>
 <body style="height: 100%; margin: 0">
 <div id="main">
-    <div id="left" style="float:left ;  width:40%;  height:100%;">
+    <div id="left" style="float:left ; background: #D1EEEE; width:40%;  height:100%;">
         <span>监控周期</span>
         <select id="monitortime" onblur="monitor()" style="width:70px;">
             <option value ="hour">小时</option>
@@ -26,7 +26,7 @@
         <div id="sysrole" style="margin-top: 100px;">
         </div>
     </div>
-    <div id="right" style="float:left ; background-color: #0f0f0f; width:60%; height:100%;"></div>
+    <div id="right" style="float:left ; background-color: #D1EEEE; width:60%; height:100%;"></div>
 </div>
 <script type="text/javascript">
 

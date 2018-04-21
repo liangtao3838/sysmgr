@@ -45,8 +45,8 @@ public class SysServiceGuiController {
         try {
             List<NodeInfoVo> sysname = sysServiceGuiService.getServiceName(nodecode);
             Map<String,List<NodeInfoVo>> map = CommonUtil.dataServiceConvert(sysname);
-            String xml = DocumentUtil.getXMl(map);
-            return xml;
+            //String xml = DocumentUtil.getXMl(map);
+            return new JsonResponse(map).toJSON();
         }catch (Exception e){
             log.error("tid:{} 获取系统调用关系系统名称异常",tid,e);
             return JsonResponse.errorResponse(-1,"error").toJSON();

@@ -44,7 +44,7 @@ public class CommonUtil {
         Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
         map.put(list.get(0).getNowRouteNode(),list);
         for (NodeInfoVo vo:list){
-            map.put(vo.getNextRouteNode(),null);
+            map.put(vo.getNextRouteNode(),new ArrayList<NodeInfoVo>());
         }
         return map;
     }
