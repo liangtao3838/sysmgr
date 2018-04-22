@@ -13,12 +13,14 @@
 	<script src="/static/lib/testHelper.js"></script>
 	<script src="/js/gui/relaindex.js"></script>
 	<link rel="stylesheet" href="/static/lib/reset.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-3.3.5/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-3.3.5/css/bootstrap-theme.css">
 </head>
 <body style="height: 100%; margin: 0">
 <div id="main">
-    <div id="left" style="float:left ; background: #D1EEEE; width:40%;  height:100%;">
-        <span>监控周期</span>
-        <select id="monitortime" onblur="monitor()" style="width:70px;">
+    <div id="left" style="float:left ; background: #D1EEEE; width:40%;  height:100%;padding-top: 10px;">
+        <span style="font-size: 15px;" class="label label-info">监控周期</span>
+        <select id="monitortime" onblur="monitor()"  style="height: 25px;border-radius:25px;border: 0px">
             <option value ="hour">小时</option>
             <option value ="minutes">五分钟</option>
             <option value ="day">天</option>

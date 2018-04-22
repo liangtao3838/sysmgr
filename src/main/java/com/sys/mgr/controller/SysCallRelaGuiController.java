@@ -47,9 +47,7 @@ public class SysCallRelaGuiController {
         long tid = System.nanoTime();
         try {
             List<NodeInfoVo> nodeInfoVos = sysCallRelaGuiService.getSysName();
-
             Map<String,List<NodeInfoVo>> map = CommonUtil.dataConvert(nodeInfoVos);
-
             //String result = DocumentUtil.getXMl(map);
             return new JsonResponse(map).toJSON();
         }catch (Exception e){
