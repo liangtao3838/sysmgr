@@ -11,6 +11,15 @@ public class NodeInfoVo implements Serializable {
     private String nowRouteName;
     private String nextRouteNode;
     private String nextRouteName;
+    private Integer yn;
+
+    public Integer getYn() {
+        return yn;
+    }
+
+    public void setYn(Integer yn) {
+        this.yn = yn;
+    }
 
     public String getNowRouteNode() {
         return nowRouteNode;

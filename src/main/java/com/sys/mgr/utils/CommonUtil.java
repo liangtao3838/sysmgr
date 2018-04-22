@@ -50,31 +50,6 @@ public class CommonUtil {
     }
 
     public static Map<String,List<NodeInfoVo>> dataConvert( List<NodeInfoVo> list){
-
-        /*if(CollectionUtils.isEmpty(list)){
-            return null;
-        }
-        Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
-        for(NodeInfoVo nodeInfo : list){
-            if(map.containsKey(nodeInfo.getNextRouteNode())){
-                List<NodeInfoVo> nodeInfos = map.get(nodeInfo.getNextRouteNode());
-                boolean flag = false;
-                for(NodeInfoVo nodeInfo1 : nodeInfos){
-                    if(nodeInfo1.getNextRouteNode().equals(nodeInfo.getNowRouteNode())){
-                        flag = true;
-                        break;
-                    }
-                }
-                if(flag){
-                    continue;
-                }
-                getMap(map,nodeInfo,list);
-            }else {
-                getMap(map,nodeInfo,list);
-            }
-        }
-        return map;*/
-
         Map<String,List<NodeInfoVo>> map = new LinkedHashMap<String, List<NodeInfoVo>>();
         for(NodeInfoVo t:list){
             List<NodeInfoVo> edge = new ArrayList<NodeInfoVo>();
@@ -115,6 +90,29 @@ public class CommonUtil {
             }
         }
         return map;
+        /*if(CollectionUtils.isEmpty(list)){
+            return null;
+        }
+        Map<String,List<NodeInfoVo>> map = new HashMap<String, List<NodeInfoVo>>();
+        for(NodeInfoVo nodeInfo : list){
+            if(map.containsKey(nodeInfo.getNextRouteNode())){
+                List<NodeInfoVo> nodeInfos = map.get(nodeInfo.getNextRouteNode());
+                boolean flag = false;
+                for(NodeInfoVo nodeInfo1 : nodeInfos){
+                    if(nodeInfo1.getNextRouteNode().equals(nodeInfo.getNowRouteNode())){
+                        flag = true;
+                        break;
+                    }
+                }
+                if(flag){
+                    continue;
+                }
+                getMap(map,nodeInfo,list);
+            }else {
+                getMap(map,nodeInfo,list);
+            }
+        }
+        return map;*/
     }
 
     /*public static void main(String[] args){

@@ -22,7 +22,6 @@ public class SysCallRelaGuiServiceImpl implements SysCallRelaGuiService{
 
     @Override
     public List<NodeInfoVo> getSysName() {
-
         List<NodeInfoVo> list =sysCallRelaGuiDao.getSysName();
         return list;
     }

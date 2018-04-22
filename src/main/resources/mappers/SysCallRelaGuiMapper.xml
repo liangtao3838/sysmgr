@@ -6,7 +6,8 @@
         select t.now_route_node as nowRouteNode,
         (select m.node_name from node_info m where t.now_route_node = m.node_code limit 1) as nowRouteName,
         t.next_route_node as nextRouteNode,
-        (select n.node_name from node_info n where t.next_route_node = n.node_code limit 1) as nextRouteName
+        (select n.node_name from node_info n where t.next_route_node = n.node_code limit 1) as nextRouteName,
+        t.yn
         from sys_call_rela t
     </select>
 
