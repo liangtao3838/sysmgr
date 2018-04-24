@@ -5,7 +5,7 @@
     <select id="getList" resultType="com.sys.mgr.model.SysService">
         SELECT `id` ,`service_name` as serviceName,`node_code` as nodeCode,`node_name` as nodeName,
         `service_addr` as serviceAddr,`method_name` as methodName,`protocol_type` as protocolType,
-        `yn`
+        `yn`,`status`
         FROM `sys_service`
         where `yn` = 0
         limit #{offset},#{rows}

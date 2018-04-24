@@ -42,9 +42,9 @@ public class CommonUtil {
             return null;
         }
         Map<String,List<NodeInfoVo>> map = new LinkedHashMap<String, List<NodeInfoVo>>();
-        map.put(list.get(0).getNowRouteNode(),list);
+        map.put(list.get(0).getNowRouteNode()+"-"+list.get(0).getNowRouteStatus(),list);
         for (NodeInfoVo vo:list){
-            map.put(vo.getNextRouteNode(),new ArrayList<NodeInfoVo>());
+            map.put(vo.getNextRouteNode()+"-"+vo.getNextRouteStatus(),new ArrayList<NodeInfoVo>());
         }
         return map;
     }
@@ -53,8 +53,8 @@ public class CommonUtil {
         Map<String,List<NodeInfoVo>> map = new LinkedHashMap<String, List<NodeInfoVo>>();
         for(NodeInfoVo t:list){
             List<NodeInfoVo> edge = new ArrayList<NodeInfoVo>();
-            map.put(t.getNowRouteNode(),edge);
-            map.put(t.getNextRouteNode(),edge);
+            map.put(t.getNowRouteNode()+"-"+t.getNowRouteStatus(),edge);
+            map.put(t.getNextRouteNode()+"-"+t.getNextRouteStatus(),edge);
             /*if(map.containsKey(t.getNowRouteNode())){
                 List<NodeInfoT> edgs = map.get(t.getNowRouteNode());
                 edgs.add(t);
@@ -75,18 +75,18 @@ public class CommonUtil {
             map.put(t.getNextRouteNode(),edgeNext);*/
         }
         for(NodeInfoVo t1:list){
-            if(map.containsKey(t1.getNowRouteNode())){
-                List<NodeInfoVo> now = map.get(t1.getNowRouteNode());
+            if(map.containsKey(t1.getNowRouteNode()+"-"+t1.getNowRouteStatus())){
+                List<NodeInfoVo> now = map.get(t1.getNowRouteNode()+"-"+t1.getNowRouteStatus());
                 now.add(t1);
-                map.put(t1.getNowRouteNode(),now);
+                map.put(t1.getNowRouteNode()+"-"+t1.getNowRouteStatus(),now);
             }
-            if(map.containsKey(t1.getNextRouteNode())){
-                List<NodeInfoVo> edgs = map.get(t1.getNextRouteNode());
+            if(map.containsKey(t1.getNextRouteNode()+"-"+t1.getNextRouteStatus())){
+                List<NodeInfoVo> edgs = map.get(t1.getNextRouteNode()+"-"+t1.getNextRouteStatus());
                 NodeInfoVo nodeInfoVo = new NodeInfoVo();
                 nodeInfoVo.setNowRouteNode(nodeInfoVo.getNextRouteNode());
                 nodeInfoVo.setNextRouteNode(nodeInfoVo.getNowRouteNode());
                 edgs.add(nodeInfoVo);
-                map.put(t1.getNextRouteNode(),edgs);
+                map.put(t1.getNextRouteNode()+"-"+t1.getNextRouteStatus(),edgs);
             }
         }
         return map;

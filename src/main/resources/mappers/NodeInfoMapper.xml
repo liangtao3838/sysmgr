@@ -4,7 +4,7 @@
 
     <select id="getList" resultType="com.sys.mgr.model.NodeInfo">
         SELECT `id` ,`node_code` as nodeCode,`node_name` as nodeName,
-        `ip_addr` as ipAddr,`call_addr` as callAddr,`yn`
+        `ip_addr` as ipAddr,`call_addr` as callAddr,`yn`,`status`
         FROM `node_info`
         where `yn` = 0
         limit #{offset},#{rows}

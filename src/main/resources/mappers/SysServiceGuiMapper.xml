@@ -3,7 +3,8 @@
 <mapper namespace="com.sys.mgr.dao.SysServiceGuiDao">
 
     <select id="getServiceName" resultType="com.sys.mgr.model.NodeInfoVo">
-        select ss.service_name as nextRouteNode,ss.node_code as nowRouteNode
+        select ss.service_name as nextRouteNode,ss.node_code as nowRouteNode,ss.status as nowRouteStatus,
+        (select n.status from sys_service ss LEFT JOIN node_info n on ss.node_code=n.node_code limit 1) as nextRouteStatus
         from sys_service ss
         where  ss.node_code=#{nodecode}
     </select>

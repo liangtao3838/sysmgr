@@ -77,7 +77,7 @@ public class SysCallRelaGuiController {
     ){
         long tid = System.nanoTime();
         String startTime = null;
-        String endTime = DateUtil.getStringDate(new Date());;
+        String endTime = DateUtil.getStringDate(new Date());
         if(monitortime.equals("hour")){
             startTime = DateUtil.getStringDate(DateUtil.addHour(new Date(),-1));
         }else if(monitortime.equals("minutes")){
@@ -93,9 +93,10 @@ public class SysCallRelaGuiController {
             List<String> count = new ArrayList<String>();
             if(!CollectionUtils.isEmpty(nodeInfoVos)){
                 for(String str:map.keySet()){
-                    Integer succNum = sysCallRelaGuiService.getSysSuccCount(str,startTime,endTime);
-                    Integer failNum = sysCallRelaGuiService.getSysFailCount(str,startTime,endTime);
-                    count.add(str+","+succNum+","+failNum);
+                    String strkey = str.split("-")[0];
+                    Integer succNum = sysCallRelaGuiService.getSysSuccCount(str.split("-")[0],startTime,endTime);
+                    Integer failNum = sysCallRelaGuiService.getSysFailCount(str.split("-")[0],startTime,endTime);
+                    count.add(strkey+","+succNum+","+failNum);
                }
             }
             Map<String,Object> resultMap = new HashMap<String, Object>();
