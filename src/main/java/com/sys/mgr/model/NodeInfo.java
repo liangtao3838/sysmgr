@@ -19,6 +19,7 @@ public class NodeInfo implements Serializable{
     private String createPin;
     private String updateTime;
     private String updatePin;
+    private String status;
     private String ts;
 
     public long getId() {
@@ -109,6 +110,14 @@ public class NodeInfo implements Serializable{
         this.ts = ts;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "NodeInfo{" +
@@ -122,6 +131,7 @@ public class NodeInfo implements Serializable{
                 ", createPin='" + createPin + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", updatePin='" + updatePin + '\'' +
+                ", status='" + status + '\'' +
                 ", ts='" + ts + '\'' +
                 '}';
     }

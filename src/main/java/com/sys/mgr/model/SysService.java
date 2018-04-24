@@ -18,6 +18,7 @@ public class SysService implements Serializable {
     private String createPin;
     private String updateTime;
     private String updatePin;
+    private String status;
     private String ts;
 
 
@@ -125,6 +126,15 @@ public class SysService implements Serializable {
         this.ts = ts;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
     @Override
     public String toString() {
         return "SysService{" +
@@ -140,6 +150,7 @@ public class SysService implements Serializable {
                 ", createPin='" + createPin + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", updatePin='" + updatePin + '\'' +
+                ", status='" + status + '\'' +
                 ", ts='" + ts + '\'' +
                 '}';
     }
