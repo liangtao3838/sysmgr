@@ -313,6 +313,18 @@
       <groupId>org.codehaus.xfire</groupId>
       <artifactId>xfire-all</artifactId>
       <version>1.2.6</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+      </exclusions>
+      <!--<exclusions>
+        <exclusion>
+          <artifactId></artifactId>
+          <groupId></groupId>
+        </exclusion>
+      </exclusions>-->
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.apache.xbean/xbean-spring -->
