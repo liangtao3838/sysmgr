@@ -318,21 +318,34 @@
           <artifactId>spring</artifactId>
           <groupId>org.springframework</groupId>
         </exclusion>
-      </exclusions>
-      <!--<exclusions>
         <exclusion>
-          <artifactId></artifactId>
-          <groupId></groupId>
+          <groupId>org.apache.xmlbeans</groupId>
+          <artifactId>xmlbeans</artifactId>
         </exclusion>
-      </exclusions>-->
+        <exclusion>
+          <groupId>org.apache.xbean</groupId>
+          <artifactId>xbean-spring</artifactId>
+        </exclusion>
+        <exclusion>
+          <artifactId>xbean</artifactId>
+          <groupId>xmlbeans</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.apache.xbean/xbean-spring -->
     <dependency>
       <groupId>org.apache.xbean</groupId>
       <artifactId>xbean-spring</artifactId>
-      <version>3.7</version>
+      <version>3.2</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.xmlbeans</groupId>
+      <artifactId>xmlbeans</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.apache.poi</groupId>
