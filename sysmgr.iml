@@ -20,7 +20,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -30,23 +30,17 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.10-FINAL" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.10-FINAL" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.10-FINAL" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-web:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.1.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:3.2.12.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:4.1.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:3.2.12.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:3.2.12.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.4" level="project" />
@@ -95,14 +89,54 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.1" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.2.1" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-all:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-aegis:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.stax-utils:stax-utils:20040917" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-ws-security:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: jmock:jmock:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: xfire:opensaml:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcprov-jdk15:133" level="project" />
+    <orderEntry type="library" name="Maven: xerces:xercesImpl:2.7.1" level="project" />
+    <orderEntry type="library" name="Maven: xml-security:xmlsec:1.3.0" level="project" />
+    <orderEntry type="library" name="Maven: wss4j:wss4j:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-discovery:commons-discovery:0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-core:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: wsdl4j:wsdl4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: jaxen:jaxen:1.1-beta-9" level="project" />
+    <orderEntry type="library" name="Maven: xerces:xmlParserAPIs:2.6.2" level="project" />
+    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ws.commons:XmlSchema:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.0" level="project" />
+    <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-httpclient:commons-httpclient:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-java5:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: xfire:xfire-jsr181-api:1.0-M1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-generator:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-jaxb2:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-xjc:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-xmlbeans:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: xmlbeans:xbean:2.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-annotations:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: commons-attributes:commons-attributes-api:2.1" level="project" />
+    <orderEntry type="library" name="Maven: ant:ant:1.5" level="project" />
+    <orderEntry type="library" name="Maven: qdox:qdox:1.5" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-jaxws:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.ws:jaxws-api:2.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jsr173_api:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.messaging.saaj:saaj-impl:1.3" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.soap:saaj-api:1.3" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.xfire:xfire-spring:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-spring:3.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.10-FINAL" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi:3.10-FINAL" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.10-FINAL" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-test:4.1.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-test:3.2.12.RELEASE" level="project" />
   </component>
 </module>

@@ -8,7 +8,6 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
        http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-
     <description>Spring公共配置</description>
     <context:component-scan base-package="com.sys.mgr.*"/>
 
@@ -29,15 +28,15 @@
     <!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           destroy-method="close">
-        <property name="driverClassName" value="${youiju.jdbc.driver}"/>
-        <property name="url" value="${youiju.jdbc.url}"/>
-        <property name="username" value="${youiju.jdbc.username}"/>
-        <property name="password" value="${youiju.jdbc.password}"/>
+        <property name="driverClassName" value="${sysmgr.jdbc.driver}"/>
+        <property name="url" value="${sysmgr.jdbc.url}"/>
+        <property name="username" value="${sysmgr.jdbc.username}"/>
+        <property name="password" value="${sysmgr.jdbc.password}"/>
         <property name="maxIdle" value="${dbcp.maxIdle}"/>
         <property name="defaultAutoCommit" value="true"/>
         <property name="timeBetweenEvictionRunsMillis" value="3600000"/>
         <property name="minEvictableIdleTimeMillis" value="3600000"/>
-        <property name="connectionProperties" value="${youiju.jdbc.connectionProperties}"/>
+        <property name="connectionProperties" value="${sysmgr.jdbc.connectionProperties}"/>
     </bean>
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <qualifier type="org.springframework.beans.factory.annotation.Qualifier" value="jdbcTemplate"/>
@@ -63,29 +62,12 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBeanName"/>
     </bean>
 
+    <import resource="classpath:org/codehaus/xfire/spring/xfire.xml"/>
+    <bean name="bookService" class="org.codehaus.xfire.spring.ServiceBean">
+        <property name="serviceBean" ref="HelloService"/>
+    </bean>
 
-
-
-        <import resource="classpath:org/codehaus/xfire/spring/xfire.xml"/>
-<!--        <bean name="echoService" class="org.codehaus.xfire.spring.ServiceBean">
-            <property name="serviceBean" ref="echo"/>
-            <property name="serviceClass" value="org.codehaus.xfire.test.Echo"/>
-            <property name="inHandlers">
-                <list>
-                    <ref bean="addressingHandler"/>
-                </list>
-            </property>
-        </bean>
-        <bean id="echo" class="org.codehaus.xfire.test.EchoImpl"/>
-        <bean id="addressingHandler" class="org.codehaus.xfire.addressing.AddressingInHandler"/>-->
-        <bean name="bookService" class="org.codehaus.xfire.spring.ServiceBean">
-            <property name="serviceBean" ref="HelloService"/>
-<!--
-            <property name="serviceClass" value="com.sys.mgr.service.IHelloService"/>
--->
-        </bean>
-
-        <bean id="HelloService" class="com.sys.mgr.service.Impl.HelloService"/>
+    <bean id="HelloService" class="com.sys.mgr.service.Impl.HelloService"></bean>
 
 
 </beans>

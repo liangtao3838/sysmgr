@@ -6,10 +6,12 @@ var seriesData = new Array();
 var seriesLinks = new Array();
 var optionData;
 $(function () {
-    monitor();
     graphData();
     optionData=getOptionData();
- });
+    if(optionData!=null||typeof optionData === "undefined"){
+        monitor();
+    }
+});
 
 function monitor() {
     var monitortime = $("#monitortime").val();
@@ -42,12 +44,22 @@ function graphData() {
         data: {},
         success: function (data) {
             resultData = data.result;
-            for(var key in resultData){
+            console.log(resultData);
+            for(var keys in resultData){
+                console.log(keys);
+                var key=keys.split("-")[0];
+                var status=keys.split("-")[1];
+                console.log(key);
                 legendData.push({name:''+key+'',textStyle:{color:'#fff'}});
                 seriesCategories.push({name: ''+key+''});
-                seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
-                for(var i = 0;i<resultData[key].length;i++){  //循环LIST
-                    var veh = resultData[key][i];//获取LIST里面的对象
+                if(status==1){
+                    seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
+                }else{
+                    seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#FF0000',}}})
+                }
+                console.log(resultData[keys].length);
+                for(var i = 0;i<resultData[keys].length;i++){  //循环LIST
+                    var veh = resultData[keys][i];//获取LIST里面的对象
                     seriesLinks.push({source: ''+veh.nowRouteNode+'',target: ''+veh.nextRouteNode+'',value: '',lineStyle: {normal: {color: {type: 'linear',x: 0,y: 0,x2: 0,y2: 1,colorStops: [{offset: 0, color: '#FF4500'}, {offset: 1, color: '#FF4500'}],globalCoord: false}}}})
                 }
             }
@@ -116,5 +128,6 @@ require([
 ], function (ec) {
     echarts = ec;
     option = optionData;
+    console.log(JSON.stringify(optionData));
     testHelper.createChart(echarts, 'right', option);
 });

@@ -12,6 +12,25 @@ public class NodeInfoVo implements Serializable {
     private String nextRouteNode;
     private String nextRouteName;
     private Integer yn;
+    private String nowRouteStatus;
+    private String nextRouteStatus;
+
+
+    public String getNowRouteStatus() {
+        return nowRouteStatus;
+    }
+
+    public void setNowRouteStatus(String nowRouteStatus) {
+        this.nowRouteStatus = nowRouteStatus;
+    }
+
+    public String getNextRouteStatus() {
+        return nextRouteStatus;
+    }
+
+    public void setNextRouteStatus(String nextRouteStatus) {
+        this.nextRouteStatus = nextRouteStatus;
+    }
 
     public Integer getYn() {
         return yn;
@@ -60,6 +79,9 @@ public class NodeInfoVo implements Serializable {
                 ", nowRouteName='" + nowRouteName + '\'' +
                 ", nextRouteNode='" + nextRouteNode + '\'' +
                 ", nextRouteName='" + nextRouteName + '\'' +
+                ", yn=" + yn +
+                ", nowRouteStatus='" + nowRouteStatus + '\'' +
+                ", nextRouteStatus='" + nextRouteStatus + '\'' +
                 '}';
     }
 }

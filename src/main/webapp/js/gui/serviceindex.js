@@ -46,12 +46,18 @@ function graphData() {
         data:{nodecode:nodecode},
         success: function (data) {
             resultData = data.result;
-            for(var key in resultData){
+            for(var keys in resultData){
+                var key=keys.split("-")[0];
+                var status=keys.split("-")[1];
                 legendData.push({name:''+key+'',textStyle:{color:'#fff'}});
                 seriesCategories.push({name: ''+key+''});
-                seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
-                for(var i = 0;i<resultData[key].length;i++){  //循环LIST
-                    var veh = resultData[key][i];//获取LIST里面的对象
+                if(status==1){
+                    seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#FF0000',}}})
+                }else{
+                    seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
+                }
+                for(var i = 0;i<resultData[keys].length;i++){  //循环LIST
+                    var veh = resultData[keys][i];//获取LIST里面的对象
                     seriesLinks.push({source: ''+veh.nowRouteNode+'',target: ''+veh.nextRouteNode+'',value: '',lineStyle: {normal: {color: {type: 'linear',x: 0,y: 0,x2: 0,y2: 1,colorStops: [{offset: 0, color: '#FF4500'}, {offset: 1, color: '#FF4500'}],globalCoord: false}}}})
                 }
             }
