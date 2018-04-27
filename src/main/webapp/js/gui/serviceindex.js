@@ -52,9 +52,9 @@ function graphData() {
                 legendData.push({name:''+key+'',textStyle:{color:'#fff'}});
                 seriesCategories.push({name: ''+key+''});
                 if(status==1){
-                    seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#FF0000',}}})
+                    seriesData.push({name: ''+key+'',symbolSize: 50,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#FF0000',}}})
                 }else{
-                    seriesData.push({name: ''+key+'',symbolSize: 80,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
+                    seriesData.push({name: ''+key+'',symbolSize: 50,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
                 }
                 for(var i = 0;i<resultData[keys].length;i++){  //循环LIST
                     var veh = resultData[keys][i];//获取LIST里面的对象
@@ -68,7 +68,7 @@ var getOptionData=function () {
      optionData={
         backgroundColor: '#D1EEEE',
         tooltip: {},
-        animationDurationUpdate: 1500,
+        animationDurationUpdate: 1000,
         animationEasingUpdate: 'quinticInOut',
         color:['#83e0ff','#45f5ce','#b158ff'],
         legend: {
@@ -81,7 +81,7 @@ var getOptionData=function () {
                 layout: 'force',
                 force: {
                     repulsion: 1000,
-                    edgeLength: 150
+                    edgeLength: 50
                 },
                 symbolSize: 50,
                 edgeSymbol: ['none', 'arrow'],
@@ -91,7 +91,7 @@ var getOptionData=function () {
                         show: true
                     }
                 },
-                edgeSymbolSize: [4, 10],
+                edgeSymbolSize: [5, 10],
                 edgeLabel: {
                     normal: {
                         show: true,

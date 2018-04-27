@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/bootstrap/bootstrap-3.3.5/css/bootstrap.css">
     <link rel="stylesheet" href="/bootstrap/bootstrap-3.3.5/css/bootstrap-theme.css">
 </head>
-<body style="height: 100%; margin: 0">
+<body style="height: 100%; margin: 0;background-color: #0f0f0f;">
 <div id="main">
     <div id="left" style="float:left ; background: #D1EEEE; width:40%;  height:100%;padding-top: 10px;">
         <span style="font-size: 15px;" class="label label-info">监控周期</span>

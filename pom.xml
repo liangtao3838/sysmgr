@@ -115,6 +115,7 @@
     <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
     <build.file.encoding>UTF-8</build.file.encoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sysmgr.api.log.path>/export/logs/sysmgr</sysmgr.api.log.path>
   </properties>
 
   <!-- 依赖项定义 -->
