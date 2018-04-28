@@ -10,20 +10,36 @@
 
     <description>quartz config</description>
 
-    <bean id="traceDetailTaskService" class="com.sys.mgr.service.Impl.TraceDetailTaskWeekServiceImpl" />
-    <!--注册定时器类，后面讲 -->
     <!--定时器1 begin-->
-    <bean id="traceDetailTaskInfo"
+    <bean id="traceDetailWeekTaskInfo"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="traceDetailTaskService" />
+        <property name="targetObject" ref="traceDetailTaskWeekService" />
         <!--指定定时器任务类要执行的方法名称 这里是midownloadItemTask -->
         <property name="targetMethod" value="excute" />
         <property name="concurrent"  value="false"/>
     </bean>
-    <bean id="traceDetailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <bean id="traceDetailWeekTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <!--配置定时器任务的调度器 -->
-        <property name="jobDetail" ref="traceDetailTaskInfo" />
-        <property name="cronExpression" value="0/5 * * * * ?" />
+        <property name="jobDetail" ref="traceDetailWeekTaskInfo" />
+        <property name="cronExpression" value="0 0 1 ? * MON" />
+        <!--每周一秒执行 -->
+        <property name="misfireInstruction">
+            <util:constant static-field="org.quartz.CronTrigger.MISFIRE_INSTRUCTION_DO_NOTHING" />
+        </property>
+    </bean>
+
+    <!--定时器1 begin-->
+    <bean id="traceDetailMonthTaskInfo"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="traceDetailTaskMonthService" />
+        <!--指定定时器任务类要执行的方法名称 这里是midownloadItemTask -->
+        <property name="targetMethod" value="excute" />
+        <property name="concurrent"  value="false"/>
+    </bean>
+    <bean id="traceDetailMonthTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!--配置定时器任务的调度器 -->
+        <property name="jobDetail" ref="traceDetailMonthTaskInfo" />
+        <property name="cronExpression" value="0 0 1 1 * ?" />
         <!--每隔5秒执行 -->
         <property name="misfireInstruction">
             <util:constant static-field="org.quartz.CronTrigger.MISFIRE_INSTRUCTION_DO_NOTHING" />
@@ -36,7 +52,8 @@
         <!--注册定时器实体 集合 -->
         <property name="triggers">
             <list>
-                <ref local="traceDetailTrigger" />
+                <ref local="traceDetailWeekTrigger" />
+                <ref local="traceDetailMonthTrigger" />
             </list>
         </property>
     </bean>

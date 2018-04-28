@@ -4,7 +4,7 @@
   <display-name>系统管理</display-name>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring/applicationContext*.xml</param-value>
+    <param-value>classpath:spring/applicationContext.xml,classpath:spring/applicationContext-task.xml</param-value>
   </context-param>
   <filter>
     <filter-name>encodingFilter</filter-name>

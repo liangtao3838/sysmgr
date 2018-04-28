@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mgr.dao.TradeDetailAnalyseDao">
+
+    <select id="getWeekTradeDetailAnalyse" resultType="com.sys.mgr.model.TradeDetailAnalyse">
+        select ss.nodeCode,ss.bdSuccNum,ss.dySuccNum,ff.bdFailNum,ff.dyFailNum from
+        (
+        SELECT n.node_code as nodeCode, n.dySuccNum, IFNULL(k.bdSuccNum,0) AS bdSuccNum
+        FROM (
+        SELECT t.node_code, IFNULL(dySuccNum,0) AS dySuccNum
+        FROM node_info t
+        LEFT JOIN (
+        SELECT qqxt, IFNULL(COUNT(1),0) AS dySuccNum
+        FROM trade_detail
+        where zt = 0
+        GROUP BY qqxt
+        ) m
+        ON t.node_code = m.qqxt
+        ) n
+        LEFT JOIN (
+        SELECT mbxt, IFNULL(COUNT(1),0) AS bdSuccNum
+        FROM trade_detail
+        where zt = 0
+        GROUP BY mbxt
+        ) k
+        ON n.node_code = k.mbxt
+        ) ss
+        JOIN
+        (
+        SELECT n.node_code as nodeCode, n.dyFailNum, IFNULL(k.bdFailNum,0) AS bdFailNum
+        FROM (
+        SELECT t.node_code, IFNULL(dyFailNum,0) AS dyFailNum
+        FROM node_info t
+        LEFT JOIN (
+        SELECT qqxt, IFNULL(COUNT(1),0) AS dyFailNum
+        FROM trade_detail
+        where zt = 0
+        GROUP BY qqxt
+        ) m
+        ON t.node_code = m.qqxt
+        ) n
+        LEFT JOIN (
+        SELECT mbxt, IFNULL(COUNT(1),0) AS bdFailNum
+        FROM trade_detail
+        where zt = 1
+        GROUP BY mbxt
+        ) k
+        ON n.node_code = k.mbxt
+        ) ff
+        on ss.nodeCode=ff.nodeCode
+        where 1=1
+        <if test="startDate != null and startDate !=''">
+            and lrrq &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate !=''">
+            and lrrq &lt;= #{endDate}
+        </if>
+    </select>
+
+
+    <select id="getMonthTradeDetailAnalyse" resultType="com.sys.mgr.model.TradeDetailAnalyse">
+      select ss.serviceCode,ss.dySuccNum,ff.dyFailNum from
+        (
+            SELECT n.service_name as serviceCode, n.dySuccNum
+                FROM (
+                    SELECT t.service_name, IFNULL(dySuccNum,0) AS dySuccNum
+                    FROM sys_service t
+                        LEFT JOIN (
+                            SELECT jkmc, IFNULL(COUNT(1),0) AS dySuccNum
+                            FROM trade_detail
+                            where zt = 0
+                            GROUP BY jkmc
+                        ) m
+                        ON t.service_name = m.jkmc
+                ) n
+            ) ss
+        LEFT JOIN
+        (
+            SELECT n.service_name as serviceCode, n.dyFailNum
+                FROM (
+                    SELECT t.service_name, IFNULL(dyFailNum,0) AS dyFailNum
+                    FROM sys_service t
+                        LEFT JOIN (
+                            SELECT jkmc, IFNULL(COUNT(1),0) AS dyFailNum
+                            FROM trade_detail
+                            where zt = 0
+                            GROUP BY qqxt
+                        ) m
+                        ON t.service_name = m.jkmc
+                ) n
+            ) ff
+        on ss.serviceCode=ff.serviceCode
+        where 1=1
+        <if test="startDate != null and startDate !=''">
+            and lrrq &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate !=''">
+            and lrrq &lt;= #{endDate}
+        </if>
+    </select>
+
+    <update id="insertAnalyseList">
+        insert into trace_detail_analyse
+        (node_code,service_code,dy_succ_num,dy_fail_num,bd_succ_num,bd_fail_num,`month`,`week`) VALUES
+        VALUES
+        <foreach collection ="list" item="analyse" separator =",">
+            (#{analyse.nodeCode},
+            #{analyse.serviceCode},
+            (#{analyse.dySuccNum},
+            #{analyse.dyFailNum},
+            (#{analyse.bdSuccNum},
+            #{analyse.bdFailNum},
+            (#{analyse.month},
+            #{analyse.week}
+        </foreach >
+    </update>
+
+
+</mapper>

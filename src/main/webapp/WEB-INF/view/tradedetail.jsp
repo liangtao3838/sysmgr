@@ -40,7 +40,6 @@
 </section>
 <div class="panel panel-primary" style="margin-top: 10px; margin-left: 4px; margin-right: 4px">
     <table class="table" width="100%">
-        <table class="table" width="100%">
             <tr>
                 <td>
                     <div class="input-group">
@@ -62,8 +61,23 @@
                     <button type="button" class="btn btn-info" onclick="exportDetail()">导出</button>
                 </td>
             </tr>
-        </table>
     </table>
+</div>
+<div class="panel panel-primary" style="margin-top: 10px; margin-left: 4px; margin-right: 4px">
+        <div style="margin: 10px 10px 10px 10px">
+            <div class="form-inline">
+            <label class="form-inline">起始周
+                <input name = "dateWeek" id="startWeek" type="text"></label>
+            <label class="form-inline">结束周
+                <input name = "dateWeek" id="endWeek" type="text"></label>
+            <input type="button" value="周导出" style="background-color: #00c0ef;" onclick="exportWeek()">
+            <label class="form-inline">起始月
+                <input name = "dateMonth" id="startMonth" type="text"></label>
+            <label class="form-inline">结束月
+                <input name = "dateMonth" id="endMonth" type="text"></label>
+            <input type="button" value="月导出" style="background-color: #00c0ef;" onclick="exportMonth()">
+            </div>
+        </div>
 </div>
 
 <!--添加页面model-begin-->
@@ -118,20 +132,6 @@
 </body>
 </html>
 <style>
-    .table {
-        table-layout: fixed;
-        width: 100% !important;
-    }
-    .msgspan{
-        font-family: "'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif";
-        font-weight: bold;
-        font-size: 14px;
-        color:#3c8dbc;
-    }
-    .operDiv{
-        text-align: left;
-        margin: 0rem;
-    }
 </style>
 
 

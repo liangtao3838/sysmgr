@@ -563,6 +563,63 @@ public class DateUtil {
         }
     }
 
+    public static String getDateWeek(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.setTime(date);
+        int weekOfMonth = calendar.get(Calendar.WEEK_OF_YEAR);
+        int year = calendar.get(Calendar.YEAR);
+        return year+"-"+weekOfMonth;
+    }
+
+
+    public static String getMonthFirstDay(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String firstday;
+        // 获取前月的第一天
+        Calendar cale = null;
+        cale = Calendar.getInstance();
+        cale.setTime(date);
+        cale.add(Calendar.MONTH, 0);
+        cale.set(Calendar.DAY_OF_MONTH, 1);
+        firstday = format.format(cale.getTime());
+        System.out.println("本月第一天 " + firstday );
+        return firstday;
+    }
+
+    public static String getMonth(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+        String firstday;
+        // 获取前月的第一天
+        Calendar cale = null;
+        cale = Calendar.getInstance();
+        cale.setTime(date);
+        cale.add(Calendar.MONTH, 0);
+        firstday = format.format(cale.getTime());
+        System.out.println("本月 " + firstday );
+        return firstday;
+    }
+
+    public static String getMonthLastDay(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String lastday;
+        // 获取前月的第一天
+        Calendar cale = null;
+        cale = Calendar.getInstance();
+        cale.setTime(date);
+        cale.add(Calendar.MONTH, 1);
+        cale.set(Calendar.DAY_OF_MONTH, 0);
+        lastday = format.format(cale.getTime());
+        System.out.println("本月最后一天分别是 ： " + lastday);
+        return lastday;
+    }
+
+    public  static void main(String []args) {
+        System.out.println(getMonth(new Date()));
+    }
+
+
     public final static String YEAR = "year";
 
     public final static String MONTH = "month";

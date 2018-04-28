@@ -1,4 +1,17 @@
     $(function () {
+        $('input[name="dateWeek"]').on('click', function () {
+            WdatePicker({
+                skin: 'default',
+                dateFmt: 'yyyy-WW',
+            });
+        });
+        $('input[name="dateMonth"]').on('click', function () {
+            WdatePicker({
+                skin: 'default',
+                dateFmt: 'yyyy-MM',
+            });
+        });
+
         InitTradeDetailQueryTableParam();
     });
     $(function(){
