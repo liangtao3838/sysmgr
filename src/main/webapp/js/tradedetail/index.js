@@ -1,10 +1,11 @@
     $(function () {
-        /*$('input[name="dateWeek"]').on('click', function () {
+        $('input[name="dateWeek"]').on('click', function () {
             WdatePicker({
                 skin: 'default',
                 dateFmt: 'yyyy-WW',
+                isShowWeek:true
             });
-        });*/
+        });
         $('input[name="dateMonth"]').on('click', function () {
             WdatePicker({
                 skin: 'default',

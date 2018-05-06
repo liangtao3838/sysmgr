@@ -67,9 +67,9 @@
         <div style="margin: 10px 10px 10px 10px">
             <div class="form-inline">
             <label class="form-inline">起始周
-                <input name = "dateWeek" id="startWeek" type="text" onfocus="WdatePicker({isShowWeek:true})"></label>
+                <input name = "dateWeek" id="startWeek" type="text" /></label>
             <label class="form-inline">结束周
-                <input name = "dateWeek" id="endWeek" type="text" onfocus="WdatePicker({isShowWeek:true})"></label>
+                <input name = "dateWeek" id="endWeek" type="text"></label>
             <input type="button" value="周导出" style="background-color: #00c0ef;" onclick="exportWeek()">
             <label class="form-inline">起始月
                 <input name = "dateMonth" id="startMonth" type="text"></label>
@@ -79,20 +79,6 @@
             </div>
         </div>
 </div>
-
-<!--添加页面model-begin-->
-<%--<div class="modal fade" id="tradedetailConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">--%>
-    <%--<div class="modal-dialog modal-md" role="document">--%>
-        <%--<form id="" method="post" action="">--%>
-            <%--<div class="modal-content">--%>
-                <%--<div class="modal-header" >--%>
-                    <%--<h3 class="modal-title" style="background-color: #3c8dbc" id="myModalLabel4">XML信息</h3>--%>
-                    <%--<textarea name = "responseInfo" readonly id="responseInfo" style="font-size: smaller;width:400px;height: 400px;" class="form-control" placeholder=""></textarea>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</form>--%>
-    <%--</div>--%>
-<%--</div>--%>
 
 <div class="modal fade" id="tradedetailConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">
     <div class="modal-dialog modal-md" role="document">
@@ -106,7 +92,6 @@
                 <div class="modal-body">
                         <textarea name = "responseInfo" readonly id="responseInfo" style="font-size: smaller;width:570px;height: 400px;" class="form-control" placeholder=""></textarea>
                 </div>
-
             </div>
         </form>
     </div>
@@ -118,8 +103,6 @@
     </div>
 </div>
 
-
-
 <script src="<%=basePath%>/js/common/jquery.js"></script>
 <script src="<%=basePath%>/bootstrap/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>/bootstrap/bootstrap-3.3.5/js/bootstrap-table.min.js"></script>
@@ -129,9 +112,14 @@
 <script src="<%=basePath%>/js/common/common.js"></script>
 <script src="<%=basePath%>/js/tradedetail/index.js"></script>
 <script src="<%=basePath%>/js/common/wdatepicker/WdatePicker.js"></script>
+<script src="<%=basePath%>/plugins/laydate/laydate.js"></script>
 </body>
 </html>
-<style>
-</style>
+<script type="text/javascript">
+    /*laydate.render({
+        elem: '#startWeek', //指定元素
+        type: 'week'
+    });*/
+</script>
 
 
