@@ -1,8 +1,6 @@
 package com.sys.mgr.service;
 
-import com.sys.mgr.model.ExceptRequest;
-import com.sys.mgr.model.ExportResponse;
-import com.sys.mgr.model.TradeDetail;
+import com.sys.mgr.model.*;
 
 import java.util.List;
 
@@ -18,4 +16,10 @@ public interface TradeDetailService {
     String getXMl(long id,String type);
 
     ExportResponse getExport(ExceptRequest request);
+
+    ExportAnalyseResponse getExportWeek(ExceptAnalyseRequest request);
+
+    ExportAnalyseResponse getExportMonth(ExceptAnalyseRequest request);
+
+
 }

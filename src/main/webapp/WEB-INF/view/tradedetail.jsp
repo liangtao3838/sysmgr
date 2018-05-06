@@ -67,9 +67,9 @@
         <div style="margin: 10px 10px 10px 10px">
             <div class="form-inline">
             <label class="form-inline">起始周
-                <input name = "dateWeek" id="startWeek" type="text"></label>
+                <input name = "dateWeek" id="startWeek" type="text" onfocus="WdatePicker({isShowWeek:true})"></label>
             <label class="form-inline">结束周
-                <input name = "dateWeek" id="endWeek" type="text"></label>
+                <input name = "dateWeek" id="endWeek" type="text" onfocus="WdatePicker({isShowWeek:true})"></label>
             <input type="button" value="周导出" style="background-color: #00c0ef;" onclick="exportWeek()">
             <label class="form-inline">起始月
                 <input name = "dateMonth" id="startMonth" type="text"></label>

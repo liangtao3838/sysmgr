@@ -1,10 +1,10 @@
     $(function () {
-        $('input[name="dateWeek"]').on('click', function () {
+        /*$('input[name="dateWeek"]').on('click', function () {
             WdatePicker({
                 skin: 'default',
                 dateFmt: 'yyyy-WW',
             });
-        });
+        });*/
         $('input[name="dateMonth"]').on('click', function () {
             WdatePicker({
                 skin: 'default',
@@ -170,5 +170,20 @@
         var endDate = document.getElementById("endDate").value;
         window.open("/tradedetail/exportTradeDetail.do?jkmc="+jkmc+"&qqxt="+qqxt+"&zt="+zt+"&startDate="+startDate+"&endDate="+endDate,'_blank')
     }
+
+    function exportWeek() {
+        var startWeek = document.getElementById("startWeek").value;
+        var endWeek = document.getElementById("endWeek").value;
+        window.open("/tradedetail/exportTradeWeek.do?startWeek="+startWeek+"&endWeek="+endWeek,'_blank')
+    }
+
+    function exportMonth() {
+        var startMonth = document.getElementById("startMonth").value;
+        var endMonth = document.getElementById("endMonth").value;
+        window.open("/tradedetail/exportTradeMonth.do?startMonth="+startMonth+"&endMonth="+endMonth,'_blank')
+    }
+
+
+
 
 

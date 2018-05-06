@@ -1,9 +1,7 @@
 package com.sys.mgr.service.Impl;
 
 import com.sys.mgr.dao.TradeDetailDao;
-import com.sys.mgr.model.ExceptRequest;
-import com.sys.mgr.model.ExportResponse;
-import com.sys.mgr.model.TradeDetail;
+import com.sys.mgr.model.*;
 import com.sys.mgr.service.TradeDetailService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +61,22 @@ public class TradeDetailServiceImpl implements TradeDetailService {
         response.setList(list);
         return response;
     }
+
+    @Override
+    public ExportAnalyseResponse getExportWeek(ExceptAnalyseRequest request) {
+        List<TradeDetailAnalyse> list = tradeDetailDao.getExportWeek(request);
+        ExportAnalyseResponse response = new ExportAnalyseResponse();
+        response.setList(list);
+        return response;
+    }
+
+    @Override
+    public ExportAnalyseResponse getExportMonth(ExceptAnalyseRequest request) {
+        List<TradeDetailAnalyse> list = tradeDetailDao.getExportMonth(request);
+        ExportAnalyseResponse response = new ExportAnalyseResponse();
+        response.setList(list);
+        return response;
+    }
+
+
 }

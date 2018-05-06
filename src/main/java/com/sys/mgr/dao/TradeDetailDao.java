@@ -1,7 +1,9 @@
 package com.sys.mgr.dao;
 
+import com.sys.mgr.model.ExceptAnalyseRequest;
 import com.sys.mgr.model.ExceptRequest;
 import com.sys.mgr.model.TradeDetail;
+import com.sys.mgr.model.TradeDetailAnalyse;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -33,4 +35,10 @@ public interface TradeDetailDao {
     Map<String,String> getXMl(@Param("id") Long id, @Param("type") String type);
 
     List<TradeDetail> getExport(@Param("request") ExceptRequest request);
+
+    List<TradeDetailAnalyse> getExportWeek(@Param("request") ExceptAnalyseRequest request);
+
+    List<TradeDetailAnalyse> getExportMonth(@Param("request") ExceptAnalyseRequest request);
+
+
 }
