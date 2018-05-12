@@ -8,6 +8,13 @@ var optionData;
 $(function () {
     graphData();
     optionData=getOptionData();
+    require([
+        'echarts'
+    ], function (ec) {
+        echarts = ec;
+        option = optionData;
+        testHelper.createChart(echarts, 'right', option);
+    });
     if(optionData!=null||typeof optionData === "undefined"){
         monitor();
     }
@@ -44,22 +51,22 @@ function graphData() {
         data: {},
         success: function (data) {
             resultData = data.result;
-            console.log(resultData);
+            var category=0;
             for(var keys in resultData){
                 var key=keys.split("-")[0];
                 var status=keys.split("-")[1];
                 legendData.push({name:''+key+'',textStyle:{color:'#fff'}});
                 seriesCategories.push({name: ''+key+''});
                 if(status==1){
-                    seriesData.push({name: ''+key+'',symbolSize: 50,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
+                    seriesData.push({name: ''+key+'',symbolSize: 50,draggable: true,category: category,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#001c43',}}})
                 }else{
-                    seriesData.push({name: ''+key+'',symbolSize: 50,draggable: true,category: 1,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#FF0000',}}})
+                    seriesData.push({name: ''+key+'',symbolSize: 50,draggable: true,category: category,itemStyle: {normal: {borderColor: '#04f2a7', borderWidth: 6,shadowBlur: 20,shadowColor: '#04f2a7',color: '#FF0000',}}})
                 }
-                console.log(resultData[keys].length);
                 for(var i = 0;i<resultData[keys].length;i++){  //循环LIST
                     var veh = resultData[keys][i];//获取LIST里面的对象
                     seriesLinks.push({source: ''+veh.nowRouteNode+'',target: ''+veh.nextRouteNode+'',value: '',lineStyle: {normal: {color: {type: 'linear',x: 0,y: 0,x2: 0,y2: 1,colorStops: [{offset: 0, color: '#FF4500'}, {offset: 1, color: '#FF4500'}],globalCoord: false}}}})
                 }
+                category++;
             }
         },
     });
@@ -114,18 +121,10 @@ var getOptionData=function () {
                 categories:seriesCategories,
             }
         ]
-    }
+    };
     return optionData;
 };
 
 
 
 
-require([
-    'echarts'
-], function (ec) {
-    echarts = ec;
-    option = optionData;
-    console.log(JSON.stringify(optionData));
-    testHelper.createChart(echarts, 'right', option);
-});

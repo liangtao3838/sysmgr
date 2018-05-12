@@ -103,6 +103,8 @@
         var form_data={};
         form_data.nodeCode=$("#nodeCode").val();
         form_data.nodeName=$("#nodeName").val();
+        form_data.ipAddr=$("#ipAddr").val();
+        form_data.callAddr=$("#callAddr").val();
         return form_data;
     };
 
@@ -112,6 +114,8 @@
         form_data.id=$("#updateId").val();
         form_data.nodeCode=$("#updatenodeCode").val();
         form_data.nodeName=$("#updatenodeName").val();
+        form_data.ipAddr=$("#updateipAddr").val();
+        form_data.callAddr=$("#updatecallAddr").val();
         return form_data;
     };
 
@@ -168,6 +172,8 @@
                     $("#updateId").val(id);
                     $("#updatenodeCode").val(data.result.nodeCode);
                     $("#updatenodeName").val(data.result.nodeName);
+                    $("#updateipAddr").val(data.result.ipAddr);
+                    $("#updatecallAddr").val(data.result.callAddr);
                     $("#updatemyModalLabel4").text("修改节点信息");
                     $("#updatenodeInfoConfigModal").modal("show");
                 }

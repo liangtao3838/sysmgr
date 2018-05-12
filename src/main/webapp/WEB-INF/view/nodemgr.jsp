@@ -61,7 +61,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <span class="input-group-addon" style="width:93px;"><b>节点编码</b></span>
+                            <span class="input-group-addon" style="width:100px;"><b>节点编码</b></span>
                             <div class="col-xs-6" style="padding:0">
                                 <input type="text" id="nodeCode" class="form-control"/>
                             </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <span class="input-group-addon" style="width:93px;"><b>IP地址</b></span>
+                            <span class="input-group-addon" style="width:100px;"><b>IP地址</b></span>
                             <div class="col-xs-6" style="padding:0">
                                 <input type="text" id="ipAddr" class="form-control"/>
                             </div>
@@ -106,7 +106,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <span class="input-group-addon" style="width:93px;"><b>节点编码</b></span>
+                            <span class="input-group-addon" style="width:100px;"><b>节点编码</b></span>
                             <div class="col-xs-6" style="padding:0">
                                 <input type="text" id="updatenodeCode" class="form-control"/>
                             </div>
@@ -115,7 +115,18 @@
                                 <input type="text" id="updatenodeName" class="form-control" />
                             </div>
                         </div>
-
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="width:100px;"><b>IP地址</b></span>
+                            <div class="col-xs-6" style="padding:0">
+                                <input type="text" id="updateipAddr" class="form-control"/>
+                            </div>
+                            <span class="input-group-addon"><b>调用地址</b></span>
+                            <div class="col-xs-10" style="padding:0;">
+                                <input type="text" id="updatecallAddr" class="form-control" />
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer" style="hanging-punctuation: none;margin-left: auto">
                         <button type="button" class="btn btn-primary" id="submitBtn_updatenodeinfo">保存</button>
