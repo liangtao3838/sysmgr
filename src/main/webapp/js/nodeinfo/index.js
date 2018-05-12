@@ -57,7 +57,15 @@
             },{
                 field: 'nodeName',
                 title: '节点名称',
-                width: '40%',
+                width: '20%',
+            },{
+                field: 'ipAddr',
+                title: 'ip地址',
+                width: '20%',
+            },{
+                field: 'callAddr',
+                title: '调用地址',
+                width: '20%',
             },{
                 field: 'yn',
                 title: '有效表示',

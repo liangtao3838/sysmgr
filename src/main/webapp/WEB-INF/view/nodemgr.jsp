@@ -70,7 +70,18 @@
                                 <input type="text" id="nodeName" class="form-control" />
                             </div>
                         </div>
-
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="width:93px;"><b>IP地址</b></span>
+                            <div class="col-xs-6" style="padding:0">
+                                <input type="text" id="ipAddr" class="form-control"/>
+                            </div>
+                            <span class="input-group-addon"><b>调用地址</b></span>
+                            <div class="col-xs-10" style="padding:0;">
+                                <input type="text" id="callAddr" class="form-control" />
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer" style="hanging-punctuation: none;margin-left: auto">
                         <button type="button" class="btn btn-primary" id="submitBtn_nodeinfo">保存</button>

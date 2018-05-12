@@ -19,10 +19,12 @@
 
     <update id="add" parameterType="com.sys.mgr.model.NodeInfo">
         insert into node_info
-       (node_code,node_name,yn,create_time,create_pin) VALUES
+       (node_code,node_name,ip_addr,call_addr,yn,create_time,create_pin) VALUES
        (
         #{nodeCode},
         #{nodeName},
+        #{ipAddr},
+        #{callAddr},
         0,
         now(),
         #{createPin}
@@ -56,6 +58,12 @@
             </if>
             <if test="nodeName != null">
                 node_name = #{nodeName},
+            </if>
+            <if test="ipAddr != null">
+                ip_addr = #{ipAddr},
+            </if>
+            <if test="callAddr != null">
+                call_addr = #{callAddr},
             </if>
         </set>
         where id = #{id}
