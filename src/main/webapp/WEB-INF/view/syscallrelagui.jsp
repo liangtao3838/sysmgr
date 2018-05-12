@@ -28,7 +28,7 @@
         <div id="sysrole" style="margin-top: 100px;">
         </div>
     </div>
-    <div id="right" style="float:left ; background-color: #D1EEEE; width:60%; height:100%;"></div>
+    <div id="right" style="float:left ; background-color: #D1EEEE; width:60%; height:100%;padding:10px "></div>
 </div>
 <script type="text/javascript">
 
